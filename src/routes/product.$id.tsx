@@ -129,7 +129,7 @@ function ProductPage() {
               </button>
             </div>
             <div className="grid grid-cols-5 gap-2">
-              {product.sizes.map((s) => (
+              {product.sizes.map((s: string) => (
                 <button
                   key={s}
                   onClick={() => setSize(s)}
