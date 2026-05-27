@@ -6,6 +6,10 @@ import shoe1 from "@/assets/products/shoe-1.jpg";
 import shoe2 from "@/assets/products/shoe-2.jpg";
 import watch1 from "@/assets/products/watch-1.jpg";
 import watch2 from "@/assets/products/watch-2.jpg";
+import teeVideo from "@/assets/products/tee-video.mp4.asset.json";
+import hoodieVideo from "@/assets/products/hoodie-video.mp4.asset.json";
+import shoeVideo from "@/assets/products/shoe-video.mp4.asset.json";
+import watchVideo from "@/assets/products/watch-video.mp4.asset.json";
 
 export type Category = "tees" | "hoodies" | "shoes" | "watches";
 
