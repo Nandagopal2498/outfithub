@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { getProduct, products } from "@/lib/products";
 import { useCart } from "@/lib/cart";
 import { ProductCard } from "@/components/ProductCard";
