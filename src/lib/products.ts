@@ -54,6 +54,7 @@ export const products: Product[] = [
     category: "tees",
     image: tee2,
     altImage: tee1,
+    video: teeVideo.url,
     rating: 5,
     reviews: 88,
     description:
@@ -68,6 +69,7 @@ export const products: Product[] = [
     category: "hoodies",
     image: hoodie1,
     altImage: hoodie2,
+    video: hoodieVideo.url,
     rating: 5,
     reviews: 212,
     badge: "Best Seller",
@@ -83,6 +85,7 @@ export const products: Product[] = [
     category: "hoodies",
     image: hoodie2,
     altImage: hoodie1,
+    video: hoodieVideo.url,
     rating: 4,
     reviews: 47,
     description:
@@ -97,6 +100,7 @@ export const products: Product[] = [
     category: "shoes",
     image: shoe1,
     altImage: shoe2,
+    video: shoeVideo.url,
     rating: 5,
     reviews: 312,
     badge: "Limited",
@@ -112,6 +116,7 @@ export const products: Product[] = [
     category: "shoes",
     image: shoe2,
     altImage: shoe1,
+    video: shoeVideo.url,
     rating: 5,
     reviews: 96,
     description:
@@ -126,6 +131,7 @@ export const products: Product[] = [
     category: "watches",
     image: watch1,
     altImage: watch2,
+    video: watchVideo.url,
     rating: 5,
     reviews: 28,
     badge: "Limited",
@@ -141,6 +147,7 @@ export const products: Product[] = [
     category: "watches",
     image: watch2,
     altImage: watch1,
+    video: watchVideo.url,
     rating: 4,
     reviews: 41,
     description:
