@@ -50,13 +50,26 @@ function Index() {
   return (
     <div>
       {/* Hero */}
-      <section className="relative h-[85vh] w-full overflow-hidden flex items-end px-6 md:px-12 pb-16 md:pb-24">
+      <section
+        className="relative h-[85vh] w-full overflow-hidden flex items-end px-6 md:px-12 pb-16 md:pb-24 group"
+        onMouseEnter={handleHeroMouseEnter}
+        onMouseLeave={handleHeroMouseLeave}
+      >
         <img
           src={heroImg}
           alt="Model wearing the Autumn Core collection"
           width={1920}
           height={1280}
-          className="absolute inset-0 w-full h-full object-cover z-0"
+          className="absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-700 group-hover:opacity-0"
+        />
+        <video
+          ref={heroVideoRef}
+          src={heroVideoAsset.url}
+          muted
+          loop
+          playsInline
+          preload="none"
+          className="absolute inset-0 w-full h-full object-cover z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent z-0" />
         <div className="relative z-10 max-w-2xl text-white animate-fade-up">
