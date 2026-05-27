@@ -21,6 +21,7 @@ export interface Product {
   category: Category;
   image: string;
   altImage: string;
+  video?: string;
   rating: number;
   reviews: number;
   badge?: string;
