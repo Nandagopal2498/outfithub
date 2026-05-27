@@ -1,5 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useRef } from "react";
 import heroImg from "@/assets/hero.jpg";
+import heroVideoAsset from "@/assets/hero-video.mp4.asset.json";
 import catTees from "@/assets/cat-tees.jpg";
 import catHoodies from "@/assets/cat-hoodies.jpg";
 import catShoes from "@/assets/cat-shoes.jpg";
