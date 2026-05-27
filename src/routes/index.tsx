@@ -34,6 +34,18 @@ const categoryTiles = [
 
 function Index() {
   const featured = products.slice(0, 3);
+  const heroVideoRef = useRef<HTMLVideoElement>(null);
+
+  const handleHeroMouseEnter = () => {
+    heroVideoRef.current?.play();
+  };
+
+  const handleHeroMouseLeave = () => {
+    if (heroVideoRef.current) {
+      heroVideoRef.current.pause();
+      heroVideoRef.current.currentTime = 0;
+    }
+  };
 
   return (
     <div>
