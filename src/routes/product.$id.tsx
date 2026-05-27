@@ -37,8 +37,10 @@ function ProductPage() {
   const { product } = Route.useLoaderData();
   const { add } = useCart();
   const [size, setSize] = useState(product.sizes[0]);
-  const [activeImage, setActiveImage] = useState(product.image);
+  const [activeMedia, setActiveMedia] = useState(product.image);
   const [added, setAdded] = useState(false);
+  const mainVideoRef = useRef<HTMLVideoElement>(null);
+  const isVideoActive = activeMedia === product.video;
 
   const related = products.filter(
     (p) => p.category === product.category && p.id !== product.id,
