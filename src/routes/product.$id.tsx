@@ -68,26 +68,47 @@ function ProductPage() {
         {/* Gallery */}
         <div className="lg:col-span-7 grid grid-cols-[80px_1fr] gap-4">
           <div className="flex flex-col gap-3">
-            {[product.image, product.altImage].map((src) => (
+            {[product.image, product.altImage, ...(product.video ? [product.video] : [])].map((src) => (
               <button
                 key={src}
-                onClick={() => setActiveImage(src)}
+                onClick={() => setActiveMedia(src)}
                 className={`aspect-square overflow-hidden bg-surface border-2 transition-colors ${
-                  activeImage === src ? "border-foreground" : "border-transparent"
+                  activeMedia === src ? "border-foreground" : "border-transparent"
                 }`}
               >
-                <img src={src} alt="" className="w-full h-full object-cover" loading="lazy" />
+                {src === product.video ? (
+                  <div className="w-full h-full relative">
+                    <img src={product.image} alt="" className="w-full h-full object-cover" loading="lazy" />
+                    <div className="absolute inset-0 grid place-items-center bg-black/30">
+                      <Play className="size-5 text-white fill-white" />
+                    </div>
+                  </div>
+                ) : (
+                  <img src={src} alt="" className="w-full h-full object-cover" loading="lazy" />
+                )}
               </button>
             ))}
           </div>
           <div className="aspect-[4/5] overflow-hidden bg-surface">
-            <img
-              src={activeImage}
-              alt={product.name}
-              width={1200}
-              height={1500}
-              className="w-full h-full object-cover"
-            />
+            {isVideoActive && product.video ? (
+              <video
+                ref={mainVideoRef}
+                src={product.video}
+                muted
+                loop
+                playsInline
+                autoPlay
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <img
+                src={activeMedia}
+                alt={product.name}
+                width={1200}
+                height={1500}
+                className="w-full h-full object-cover"
+              />
+            )}
           </div>
         </div>
 
