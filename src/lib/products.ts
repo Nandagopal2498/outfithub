@@ -38,6 +38,7 @@ export const products: Product[] = [
     category: "tees",
     image: tee1,
     altImage: tee2,
+    video: teeVideo.url,
     rating: 5,
     reviews: 124,
     badge: "New",
