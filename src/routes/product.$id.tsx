@@ -2,6 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState, useRef } from "react";
 import { getProduct, products } from "@/lib/products";
 import { useCart } from "@/lib/cart";
+import { useWishlist } from "@/lib/wishlist";
 import { ProductCard } from "@/components/ProductCard";
 import { Heart, Star, Truck, Recycle, Play } from "lucide-react";
 
