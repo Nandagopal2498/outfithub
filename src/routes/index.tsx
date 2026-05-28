@@ -1,5 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useRef } from "react";
 import heroImg from "@/assets/hero.jpg";
+import heroVideoAsset from "@/assets/hero-video.mp4.asset.json";
 import catTees from "@/assets/cat-tees.jpg";
 import catHoodies from "@/assets/cat-hoodies.jpg";
 import catShoes from "@/assets/cat-shoes.jpg";
@@ -32,17 +34,42 @@ const categoryTiles = [
 
 function Index() {
   const featured = products.slice(0, 3);
+  const heroVideoRef = useRef<HTMLVideoElement>(null);
+
+  const handleHeroMouseEnter = () => {
+    heroVideoRef.current?.play();
+  };
+
+  const handleHeroMouseLeave = () => {
+    if (heroVideoRef.current) {
+      heroVideoRef.current.pause();
+      heroVideoRef.current.currentTime = 0;
+    }
+  };
 
   return (
     <div>
       {/* Hero */}
-      <section className="relative h-[85vh] w-full overflow-hidden flex items-end px-6 md:px-12 pb-16 md:pb-24">
+      <section
+        className="relative h-[85vh] w-full overflow-hidden flex items-end px-6 md:px-12 pb-16 md:pb-24 group"
+        onMouseEnter={handleHeroMouseEnter}
+        onMouseLeave={handleHeroMouseLeave}
+      >
         <img
           src={heroImg}
           alt="Model wearing the Autumn Core collection"
           width={1920}
           height={1280}
-          className="absolute inset-0 w-full h-full object-cover z-0"
+          className="absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-700 group-hover:opacity-0"
+        />
+        <video
+          ref={heroVideoRef}
+          src={heroVideoAsset.url}
+          muted
+          loop
+          playsInline
+          preload="none"
+          className="absolute inset-0 w-full h-full object-cover z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent z-0" />
         <div className="relative z-10 max-w-2xl text-white animate-fade-up">

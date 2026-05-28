@@ -6,6 +6,10 @@ import shoe1 from "@/assets/products/shoe-1.jpg";
 import shoe2 from "@/assets/products/shoe-2.jpg";
 import watch1 from "@/assets/products/watch-1.jpg";
 import watch2 from "@/assets/products/watch-2.jpg";
+import teeVideo from "@/assets/products/tee-video.mp4.asset.json";
+import hoodieVideo from "@/assets/products/hoodie-video.mp4.asset.json";
+import shoeVideo from "@/assets/products/shoe-video.mp4.asset.json";
+import watchVideo from "@/assets/products/watch-video.mp4.asset.json";
 
 export type Category = "tees" | "hoodies" | "shoes" | "watches";
 
@@ -17,6 +21,7 @@ export interface Product {
   category: Category;
   image: string;
   altImage: string;
+  video?: string;
   rating: number;
   reviews: number;
   badge?: string;
@@ -33,6 +38,7 @@ export const products: Product[] = [
     category: "tees",
     image: tee1,
     altImage: tee2,
+    video: teeVideo.url,
     rating: 5,
     reviews: 124,
     badge: "New",
@@ -48,6 +54,7 @@ export const products: Product[] = [
     category: "tees",
     image: tee2,
     altImage: tee1,
+    video: teeVideo.url,
     rating: 5,
     reviews: 88,
     description:
@@ -62,6 +69,7 @@ export const products: Product[] = [
     category: "hoodies",
     image: hoodie1,
     altImage: hoodie2,
+    video: hoodieVideo.url,
     rating: 5,
     reviews: 212,
     badge: "Best Seller",
@@ -77,6 +85,7 @@ export const products: Product[] = [
     category: "hoodies",
     image: hoodie2,
     altImage: hoodie1,
+    video: hoodieVideo.url,
     rating: 4,
     reviews: 47,
     description:
@@ -91,6 +100,7 @@ export const products: Product[] = [
     category: "shoes",
     image: shoe1,
     altImage: shoe2,
+    video: shoeVideo.url,
     rating: 5,
     reviews: 312,
     badge: "Limited",
@@ -106,6 +116,7 @@ export const products: Product[] = [
     category: "shoes",
     image: shoe2,
     altImage: shoe1,
+    video: shoeVideo.url,
     rating: 5,
     reviews: 96,
     description:
@@ -120,6 +131,7 @@ export const products: Product[] = [
     category: "watches",
     image: watch1,
     altImage: watch2,
+    video: watchVideo.url,
     rating: 5,
     reviews: 28,
     badge: "Limited",
@@ -135,6 +147,7 @@ export const products: Product[] = [
     category: "watches",
     image: watch2,
     altImage: watch1,
+    video: watchVideo.url,
     rating: 4,
     reviews: 41,
     description:
