@@ -3,7 +3,7 @@ import type { Product } from "@/lib/products";
 import { useCart } from "@/lib/cart";
 import { useWishlist } from "@/lib/wishlist";
 import { Heart, Star } from "lucide-react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 export function ProductCard({ product }: { product: Product }) {
   const { add } = useCart();
@@ -11,9 +11,16 @@ export function ProductCard({ product }: { product: Product }) {
   const saved = has(product.id);
   const stars = Array.from({ length: 5 }, (_, i) => i < product.rating);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [activeVariant, setActiveVariant] = useState<number | null>(null);
+
+  const displayImage =
+    activeVariant !== null ? product.variants[activeVariant].image : product.image;
+  const displayColor =
+    activeVariant !== null ? product.variants[activeVariant].name : product.color;
+  const variantActive = activeVariant !== null;
 
   const handleMouseEnter = () => {
-    videoRef.current?.play();
+    if (!variantActive) videoRef.current?.play();
   };
 
   const handleMouseLeave = () => {
@@ -21,6 +28,7 @@ export function ProductCard({ product }: { product: Product }) {
       videoRef.current.pause();
       videoRef.current.currentTime = 0;
     }
+    setActiveVariant(null);
   };
 
   return (
@@ -31,12 +39,14 @@ export function ProductCard({ product }: { product: Product }) {
         className="block relative aspect-[3/4] overflow-hidden bg-surface mb-5"
       >
         <img
-          src={product.image}
-          alt={`${product.name} — ${product.color}`}
+          src={displayImage}
+          alt={`${product.name} — ${displayColor}`}
           loading="lazy"
           width={800}
           height={1024}
-          className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0"
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
+            variantActive ? "opacity-100" : "group-hover:opacity-0"
+          }`}
         />
         {product.video ? (
           <video
@@ -46,7 +56,9 @@ export function ProductCard({ product }: { product: Product }) {
             loop
             playsInline
             preload="none"
-            className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
+              variantActive ? "opacity-0" : "opacity-0 group-hover:opacity-100"
+            }`}
           />
         ) : (
           <img
@@ -56,7 +68,9 @@ export function ProductCard({ product }: { product: Product }) {
             loading="lazy"
             width={800}
             height={1024}
-            className="absolute inset-0 w-full h-full object-cover scale-105 transition-transform duration-700 group-hover:scale-100"
+            className={`absolute inset-0 w-full h-full object-cover scale-105 transition-all duration-700 ${
+              variantActive ? "opacity-0" : "group-hover:scale-100"
+            }`}
           />
         )}
         {product.badge && (
@@ -89,22 +103,45 @@ export function ProductCard({ product }: { product: Product }) {
           <h3 className="text-sm font-bold uppercase tracking-tight truncate">
             {product.name}
           </h3>
-          <p className="text-xs text-muted-foreground mt-1">{product.color}</p>
+          <p className="text-xs text-muted-foreground mt-1 transition-colors">
+            {displayColor}
+          </p>
         </div>
         <span className="text-sm font-bold whitespace-nowrap">${product.price}</span>
       </div>
-      <div className="mt-2 flex items-center gap-1.5">
-        <div className="flex">
-          {stars.map((on, i) => (
-            <Star
-              key={i}
-              className={`size-3 ${on ? "fill-foreground text-foreground" : "text-muted-foreground/30"}`}
-            />
-          ))}
+      <div className="mt-2 flex items-center justify-between gap-2">
+        <div className="flex items-center gap-1.5">
+          <div className="flex">
+            {stars.map((on, i) => (
+              <Star
+                key={i}
+                className={`size-3 ${on ? "fill-foreground text-foreground" : "text-muted-foreground/30"}`}
+              />
+            ))}
+          </div>
+          <span className="text-[10px] text-muted-foreground font-semibold">
+            ({product.reviews})
+          </span>
         </div>
-        <span className="text-[10px] text-muted-foreground font-semibold">
-          ({product.reviews})
-        </span>
+        {product.variants.length > 1 && (
+          <div className="flex items-center gap-1.5">
+            {product.variants.map((v, i) => (
+              <button
+                key={v.name}
+                type="button"
+                aria-label={`Preview ${v.name}`}
+                onMouseEnter={() => setActiveVariant(i)}
+                onFocus={() => setActiveVariant(i)}
+                className={`w-3.5 h-3.5 rounded-full border transition-transform hover:scale-125 ${
+                  activeVariant === i
+                    ? "border-foreground scale-125"
+                    : "border-border"
+                }`}
+                style={{ backgroundColor: v.swatch }}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
