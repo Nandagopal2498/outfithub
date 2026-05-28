@@ -63,6 +63,14 @@ export function Header() {
               <User className="size-4" />
               <span className="hidden lg:inline text-[13px] font-semibold uppercase">Account</span>
             </Link>
+            <Link to="/wishlist" className="flex items-center gap-1.5 relative" aria-label="Wishlist">
+              <Heart className={`size-4 ${wishCount > 0 ? "fill-foreground" : ""}`} />
+              {wishCount > 0 && (
+                <span className="absolute -top-1.5 -right-2 bg-foreground text-background text-[9px] min-w-4 h-4 px-1 rounded-full flex items-center justify-center font-bold">
+                  {wishCount}
+                </span>
+              )}
+            </Link>
             <Link to="/cart" className="flex items-center gap-2 group" aria-label="Cart">
               <span className="text-[13px] font-semibold uppercase">Cart</span>
               <span className="bg-foreground text-background text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold">
