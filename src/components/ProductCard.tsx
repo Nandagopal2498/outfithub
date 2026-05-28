@@ -1,11 +1,14 @@
 import { Link } from "@tanstack/react-router";
 import type { Product } from "@/lib/products";
 import { useCart } from "@/lib/cart";
-import { Star } from "lucide-react";
+import { useWishlist } from "@/lib/wishlist";
+import { Heart, Star } from "lucide-react";
 import { useRef } from "react";
 
 export function ProductCard({ product }: { product: Product }) {
   const { add } = useCart();
+  const { has, toggle } = useWishlist();
+  const saved = has(product.id);
   const stars = Array.from({ length: 5 }, (_, i) => i < product.rating);
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -61,6 +64,16 @@ export function ProductCard({ product }: { product: Product }) {
             {product.badge}
           </span>
         )}
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            toggle(product.id);
+          }}
+          aria-label={saved ? "Remove from wishlist" : "Save to wishlist"}
+          className="absolute top-3 right-3 w-9 h-9 grid place-items-center bg-background/80 backdrop-blur hover:bg-background transition-colors"
+        >
+          <Heart className={`size-4 ${saved ? "fill-foreground text-foreground" : ""}`} />
+        </button>
         <button
           onClick={(e) => {
             e.preventDefault();

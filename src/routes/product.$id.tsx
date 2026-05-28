@@ -2,6 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState, useRef } from "react";
 import { getProduct, products } from "@/lib/products";
 import { useCart } from "@/lib/cart";
+import { useWishlist } from "@/lib/wishlist";
 import { ProductCard } from "@/components/ProductCard";
 import { Heart, Star, Truck, Recycle, Play } from "lucide-react";
 
@@ -36,6 +37,8 @@ export const Route = createFileRoute("/product/$id")({
 function ProductPage() {
   const { product } = Route.useLoaderData();
   const { add } = useCart();
+  const { has, toggle } = useWishlist();
+  const saved = has(product.id);
   const [size, setSize] = useState(product.sizes[0]);
   const [activeMedia, setActiveMedia] = useState(product.image);
   const [added, setAdded] = useState(false);
@@ -176,10 +179,11 @@ function ProductPage() {
               {added ? "Added to Cart" : "Add to Cart"}
             </button>
             <button
-              className="border border-border p-4 hover:border-foreground transition-colors"
-              aria-label="Wishlist"
+              onClick={() => toggle(product.id)}
+              className={`border p-4 transition-colors ${saved ? "border-foreground bg-foreground text-background" : "border-border hover:border-foreground"}`}
+              aria-label={saved ? "Remove from wishlist" : "Save to wishlist"}
             >
-              <Heart className="size-4" />
+              <Heart className={`size-4 ${saved ? "fill-current" : ""}`} />
             </button>
           </div>
 
