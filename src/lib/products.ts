@@ -52,6 +52,11 @@ export const products: Product[] = [
     description:
       "A 260gsm garment-dyed cotton tee with a relaxed boxy silhouette and reinforced ribbed collar. Cut and sewn in Portugal.",
     sizes: ["XS", "S", "M", "L", "XL"],
+    variants: [
+      { name: "Optic White", swatch: "#f5f3ee", image: tee1 },
+      { name: "Onyx Black", swatch: "#0d0d0d", image: tee2 },
+      { name: "Stone Grey", swatch: "#8a8780", image: tee1 },
+    ],
   },
   {
     id: "core-tee-black",
@@ -67,6 +72,10 @@ export const products: Product[] = [
     description:
       "A 260gsm garment-dyed cotton tee with a relaxed boxy silhouette. The wardrobe foundation in true monochrome black.",
     sizes: ["XS", "S", "M", "L", "XL"],
+    variants: [
+      { name: "Onyx Black", swatch: "#0d0d0d", image: tee2 },
+      { name: "Optic White", swatch: "#f5f3ee", image: tee1 },
+    ],
   },
   {
     id: "fleece-hoodie-black",
@@ -83,6 +92,11 @@ export const products: Product[] = [
     description:
       "Heavyweight 450gsm brushed-back fleece with double-lined hood and ribbed cuffs. Engineered for daily layering.",
     sizes: ["S", "M", "L", "XL"],
+    variants: [
+      { name: "Onyx Black", swatch: "#0d0d0d", image: hoodie1 },
+      { name: "Stone Grey", swatch: "#8a8780", image: hoodie2 },
+      { name: "Bone", swatch: "#e8e3da", image: hoodie2 },
+    ],
   },
   {
     id: "fleece-hoodie-stone",
@@ -98,6 +112,10 @@ export const products: Product[] = [
     description:
       "Garment-dyed for a softer, lived-in feel. Mid-weight loopback cotton with structured shoulder line.",
     sizes: ["S", "M", "L", "XL"],
+    variants: [
+      { name: "Stone Grey", swatch: "#8a8780", image: hoodie2 },
+      { name: "Onyx Black", swatch: "#0d0d0d", image: hoodie1 },
+    ],
   },
   {
     id: "nexus-trainer-white",
@@ -114,6 +132,11 @@ export const products: Product[] = [
     description:
       "Full-grain leather upper on a sculpted EVA midsole. Built for movement, refined for the city.",
     sizes: ["8", "9", "10", "11", "12"],
+    variants: [
+      { name: "Arctic White", swatch: "#f5f3ee", image: shoe1 },
+      { name: "Stealth Black", swatch: "#0d0d0d", image: shoe2 },
+      { name: "Sand", swatch: "#c9b99a", image: shoe1 },
+    ],
   },
   {
     id: "nexus-trainer-black",
@@ -129,6 +152,10 @@ export const products: Product[] = [
     description:
       "All-black mesh-and-leather runner with cushioned air sole unit. Quiet performance, monochrome attitude.",
     sizes: ["8", "9", "10", "11", "12"],
+    variants: [
+      { name: "Stealth Black", swatch: "#0d0d0d", image: shoe2 },
+      { name: "Arctic White", swatch: "#f5f3ee", image: shoe1 },
+    ],
   },
   {
     id: "sector-04-watch",
@@ -145,6 +172,10 @@ export const products: Product[] = [
     description:
       "42mm PVD-coated case with sapphire crystal and a Swiss chronograph movement. Built for measured precision.",
     sizes: ["One Size"],
+    variants: [
+      { name: "Stealth Matte", swatch: "#1a1a1a", image: watch1 },
+      { name: "Brushed Steel", swatch: "#b8b8bd", image: watch2 },
+    ],
   },
   {
     id: "field-watch-02",
@@ -160,6 +191,10 @@ export const products: Product[] = [
     description:
       "Automatic 38mm field watch with full-grain leather strap. A daily companion built to outlast trends.",
     sizes: ["One Size"],
+    variants: [
+      { name: "Brushed Steel", swatch: "#b8b8bd", image: watch2 },
+      { name: "Stealth Matte", swatch: "#1a1a1a", image: watch1 },
+    ],
   },
 ];
 
