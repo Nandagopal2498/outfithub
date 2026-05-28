@@ -13,6 +13,12 @@ import watchVideo from "@/assets/products/watch-video.mp4.asset.json";
 
 export type Category = "tees" | "hoodies" | "shoes" | "watches";
 
+export interface ColorVariant {
+  name: string;
+  swatch: string;
+  image: string;
+}
+
 export interface Product {
   id: string;
   name: string;
@@ -27,6 +33,7 @@ export interface Product {
   badge?: string;
   description: string;
   sizes: string[];
+  variants: ColorVariant[];
 }
 
 export const products: Product[] = [
