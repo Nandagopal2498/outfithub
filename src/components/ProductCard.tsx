@@ -1,11 +1,14 @@
 import { Link } from "@tanstack/react-router";
 import type { Product } from "@/lib/products";
 import { useCart } from "@/lib/cart";
-import { Star } from "lucide-react";
+import { useWishlist } from "@/lib/wishlist";
+import { Heart, Star } from "lucide-react";
 import { useRef } from "react";
 
 export function ProductCard({ product }: { product: Product }) {
   const { add } = useCart();
+  const { has, toggle } = useWishlist();
+  const saved = has(product.id);
   const stars = Array.from({ length: 5 }, (_, i) => i < product.rating);
   const videoRef = useRef<HTMLVideoElement>(null);
 
