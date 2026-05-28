@@ -37,6 +37,8 @@ export const Route = createFileRoute("/product/$id")({
 function ProductPage() {
   const { product } = Route.useLoaderData();
   const { add } = useCart();
+  const { has, toggle } = useWishlist();
+  const saved = has(product.id);
   const [size, setSize] = useState(product.sizes[0]);
   const [activeMedia, setActiveMedia] = useState(product.image);
   const [added, setAdded] = useState(false);
