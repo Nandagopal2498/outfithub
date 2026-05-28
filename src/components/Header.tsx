@@ -15,6 +15,7 @@ export function AnnouncementBar() {
 
 export function Header() {
   const { count } = useCart();
+  const { count: wishCount } = useWishlist();
   const [open, setOpen] = useState(false);
 
   return (
