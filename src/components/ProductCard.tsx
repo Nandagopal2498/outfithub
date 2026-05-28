@@ -2,26 +2,13 @@ import { Link } from "@tanstack/react-router";
 import type { Product } from "@/lib/products";
 import { useCart } from "@/lib/cart";
 import { Star } from "lucide-react";
-import { useRef } from "react";
 
 export function ProductCard({ product }: { product: Product }) {
   const { add } = useCart();
   const stars = Array.from({ length: 5 }, (_, i) => i < product.rating);
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  const handleMouseEnter = () => {
-    videoRef.current?.play();
-  };
-
-  const handleMouseLeave = () => {
-    if (videoRef.current) {
-      videoRef.current.pause();
-      videoRef.current.currentTime = 0;
-    }
-  };
 
   return (
-    <div className="group" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+    <div className="group">
       <Link
         to="/product/$id"
         params={{ id: product.id }}
@@ -35,27 +22,15 @@ export function ProductCard({ product }: { product: Product }) {
           height={1024}
           className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0"
         />
-        {product.video ? (
-          <video
-            ref={videoRef}
-            src={product.video}
-            muted
-            loop
-            playsInline
-            preload="none"
-            className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-          />
-        ) : (
-          <img
-            src={product.altImage}
-            alt=""
-            aria-hidden
-            loading="lazy"
-            width={800}
-            height={1024}
-            className="absolute inset-0 w-full h-full object-cover scale-105 transition-transform duration-700 group-hover:scale-100"
-          />
-        )}
+        <img
+          src={product.altImage}
+          alt=""
+          aria-hidden
+          loading="lazy"
+          width={800}
+          height={1024}
+          className="absolute inset-0 w-full h-full object-cover scale-105 transition-transform duration-700 group-hover:scale-100"
+        />
         {product.badge && (
           <span className="absolute top-4 left-4 bg-foreground text-background text-[9px] font-bold uppercase px-2 py-1 tracking-tighter">
             {product.badge}

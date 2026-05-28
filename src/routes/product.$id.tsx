@@ -1,9 +1,9 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { getProduct, products } from "@/lib/products";
 import { useCart } from "@/lib/cart";
 import { ProductCard } from "@/components/ProductCard";
-import { Heart, Star, Truck, Recycle, Play } from "lucide-react";
+import { Heart, Star, Truck, Recycle } from "lucide-react";
 
 export const Route = createFileRoute("/product/$id")({
   loader: ({ params }) => {
@@ -37,10 +37,8 @@ function ProductPage() {
   const { product } = Route.useLoaderData();
   const { add } = useCart();
   const [size, setSize] = useState(product.sizes[0]);
-  const [activeMedia, setActiveMedia] = useState(product.image);
+  const [activeImage, setActiveImage] = useState(product.image);
   const [added, setAdded] = useState(false);
-  const mainVideoRef = useRef<HTMLVideoElement>(null);
-  const isVideoActive = activeMedia === product.video;
 
   const related = products.filter(
     (p) => p.category === product.category && p.id !== product.id,
@@ -68,47 +66,26 @@ function ProductPage() {
         {/* Gallery */}
         <div className="lg:col-span-7 grid grid-cols-[80px_1fr] gap-4">
           <div className="flex flex-col gap-3">
-            {[product.image, product.altImage, ...(product.video ? [product.video] : [])].map((src) => (
+            {[product.image, product.altImage].map((src) => (
               <button
                 key={src}
-                onClick={() => setActiveMedia(src)}
+                onClick={() => setActiveImage(src)}
                 className={`aspect-square overflow-hidden bg-surface border-2 transition-colors ${
-                  activeMedia === src ? "border-foreground" : "border-transparent"
+                  activeImage === src ? "border-foreground" : "border-transparent"
                 }`}
               >
-                {src === product.video ? (
-                  <div className="w-full h-full relative">
-                    <img src={product.image} alt="" className="w-full h-full object-cover" loading="lazy" />
-                    <div className="absolute inset-0 grid place-items-center bg-black/30">
-                      <Play className="size-5 text-white fill-white" />
-                    </div>
-                  </div>
-                ) : (
-                  <img src={src} alt="" className="w-full h-full object-cover" loading="lazy" />
-                )}
+                <img src={src} alt="" className="w-full h-full object-cover" loading="lazy" />
               </button>
             ))}
           </div>
           <div className="aspect-[4/5] overflow-hidden bg-surface">
-            {isVideoActive && product.video ? (
-              <video
-                ref={mainVideoRef}
-                src={product.video}
-                muted
-                loop
-                playsInline
-                autoPlay
-                className="w-full h-full object-cover"
-              />
-            ) : (
-              <img
-                src={activeMedia}
-                alt={product.name}
-                width={1200}
-                height={1500}
-                className="w-full h-full object-cover"
-              />
-            )}
+            <img
+              src={activeImage}
+              alt={product.name}
+              width={1200}
+              height={1500}
+              className="w-full h-full object-cover"
+            />
           </div>
         </div>
 
