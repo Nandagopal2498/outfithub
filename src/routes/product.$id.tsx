@@ -179,10 +179,11 @@ function ProductPage() {
               {added ? "Added to Cart" : "Add to Cart"}
             </button>
             <button
-              className="border border-border p-4 hover:border-foreground transition-colors"
-              aria-label="Wishlist"
+              onClick={() => toggle(product.id)}
+              className={`border p-4 transition-colors ${saved ? "border-foreground bg-foreground text-background" : "border-border hover:border-foreground"}`}
+              aria-label={saved ? "Remove from wishlist" : "Save to wishlist"}
             >
-              <Heart className="size-4" />
+              <Heart className={`size-4 ${saved ? "fill-current" : ""}`} />
             </button>
           </div>
 
