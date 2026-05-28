@@ -9,6 +9,7 @@ import {
 
 import appCss from "../styles.css?url";
 import { CartProvider } from "@/lib/cart";
+import { WishlistProvider } from "@/lib/wishlist";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
