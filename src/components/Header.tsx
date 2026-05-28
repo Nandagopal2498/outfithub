@@ -1,7 +1,8 @@
 import { Link } from "@tanstack/react-router";
-import { Menu, Search, User, X } from "lucide-react";
+import { Heart, Menu, Search, User, X } from "lucide-react";
 import { useState } from "react";
 import { useCart } from "@/lib/cart";
+import { useWishlist } from "@/lib/wishlist";
 import { categories } from "@/lib/products";
 
 export function AnnouncementBar() {
