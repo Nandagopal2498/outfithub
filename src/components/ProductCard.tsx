@@ -67,6 +67,16 @@ export function ProductCard({ product }: { product: Product }) {
         <button
           onClick={(e) => {
             e.preventDefault();
+            toggle(product.id);
+          }}
+          aria-label={saved ? "Remove from wishlist" : "Save to wishlist"}
+          className="absolute top-3 right-3 w-9 h-9 grid place-items-center bg-background/80 backdrop-blur hover:bg-background transition-colors"
+        >
+          <Heart className={`size-4 ${saved ? "fill-foreground text-foreground" : ""}`} />
+        </button>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
             add(product.id, product.sizes[0], 1);
           }}
           className="absolute bottom-0 left-0 w-full py-4 bg-foreground text-background text-[10px] font-bold uppercase tracking-widest translate-y-full group-hover:translate-y-0 transition-transform"
