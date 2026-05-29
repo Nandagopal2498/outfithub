@@ -66,7 +66,7 @@ function CartPage() {
                             {product.name}
                           </h3>
                           <p className="text-xs text-muted-foreground mt-1">
-                            {product.color} · Size {item.size}
+                            {item.variant} · Size {item.size}
                           </p>
                         </div>
                         <button
