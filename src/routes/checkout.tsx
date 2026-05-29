@@ -142,16 +142,16 @@ function CheckoutPage() {
                 const p = getProduct(item.id);
                 if (!p) return null;
                 return (
-                  <li key={`${item.id}-${item.size}`} className="flex gap-4 items-center">
+                  <li key={`${item.id}-${item.size}-${item.variant}`} className="flex gap-4 items-center">
                     <div className="relative size-16 bg-background overflow-hidden shrink-0">
-                      <img src={p.image} alt={p.name} className="w-full h-full object-cover" />
+                      <img src={p.variants.find((v) => v.name === item.variant)?.image ?? p.image} alt={p.name} className="w-full h-full object-cover" />
                       <span className="absolute -top-1 -right-1 bg-foreground text-background text-[10px] size-5 rounded-full grid place-items-center font-bold">
                         {item.qty}
                       </span>
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-xs font-bold uppercase tracking-tight truncate">{p.name}</p>
-                      <p className="text-[11px] text-muted-foreground">{p.color} · {item.size}</p>
+                      <p className="text-[11px] text-muted-foreground">{item.variant} · {item.size}</p>
                     </div>
                     <span className="text-xs font-bold">${(p.price * item.qty).toFixed(2)}</span>
                   </li>

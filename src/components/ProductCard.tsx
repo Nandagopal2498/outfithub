@@ -91,7 +91,8 @@ export function ProductCard({ product }: { product: Product }) {
         <button
           onClick={(e) => {
             e.preventDefault();
-            add(product.id, product.sizes[0], 1);
+            const variant = activeVariant !== null ? product.variants[activeVariant].name : product.color;
+            add(product.id, product.sizes[0], 1, variant);
           }}
           className="absolute bottom-0 left-0 w-full py-4 bg-foreground text-background text-[10px] font-bold uppercase tracking-widest translate-y-full group-hover:translate-y-0 transition-transform"
         >

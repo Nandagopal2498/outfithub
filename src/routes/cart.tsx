@@ -45,7 +45,7 @@ function CartPage() {
                 if (!product) return null;
                 return (
                   <div
-                    key={`${item.id}-${item.size}`}
+                    key={`${item.id}-${item.size}-${item.variant}`}
                     className="flex gap-4 md:gap-6 py-6 border-b border-border"
                   >
                     <Link
@@ -54,7 +54,7 @@ function CartPage() {
                       className="w-24 md:w-32 aspect-[3/4] bg-surface overflow-hidden shrink-0"
                     >
                       <img
-                        src={product.image}
+                        src={product.variants.find((v) => v.name === item.variant)?.image ?? product.image}
                         alt={product.name}
                         className="w-full h-full object-cover"
                       />
@@ -66,11 +66,11 @@ function CartPage() {
                             {product.name}
                           </h3>
                           <p className="text-xs text-muted-foreground mt-1">
-                            {product.color} · Size {item.size}
+                            {item.variant} · Size {item.size}
                           </p>
                         </div>
                         <button
-                          onClick={() => remove(item.id, item.size)}
+                          onClick={() => remove(item.id, item.size, item.variant)}
                           aria-label="Remove"
                           className="text-muted-foreground hover:text-foreground"
                         >
@@ -80,7 +80,7 @@ function CartPage() {
                       <div className="mt-auto flex items-center justify-between gap-3">
                         <div className="flex items-center border border-border">
                           <button
-                            onClick={() => setQty(item.id, item.size, item.qty - 1)}
+                            onClick={() => setQty(item.id, item.size, item.qty - 1, item.variant)}
                             className="p-2 hover:bg-surface"
                             aria-label="Decrease"
                           >
@@ -90,7 +90,7 @@ function CartPage() {
                             {item.qty}
                           </span>
                           <button
-                            onClick={() => setQty(item.id, item.size, item.qty + 1)}
+                            onClick={() => setQty(item.id, item.size, item.qty + 1, item.variant)}
                             className="p-2 hover:bg-surface"
                             aria-label="Increase"
                           >

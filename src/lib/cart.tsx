@@ -5,15 +5,16 @@ export interface CartItem {
   id: string;
   qty: number;
   size: string;
+  variant: string;
 }
 
 interface CartContextValue {
   items: CartItem[];
   count: number;
   subtotal: number;
-  add: (id: string, size: string, qty?: number) => void;
-  setQty: (id: string, size: string, qty: number) => void;
-  remove: (id: string, size: string) => void;
+  add: (id: string, size: string, qty?: number, variant?: string) => void;
+  setQty: (id: string, size: string, qty: number, variant: string) => void;
+  remove: (id: string, size: string, variant: string) => void;
   clear: () => void;
 }
 
@@ -27,7 +28,15 @@ export function CartProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
-      if (raw) setItems(JSON.parse(raw));
+      if (raw) {
+        const parsed: CartItem[] = JSON.parse(raw);
+        setItems(
+          parsed.map((item) => ({
+            ...item,
+            variant: item.variant ?? getProduct(item.id)?.color ?? "Unknown",
+          })),
+        );
+      }
     } catch {}
     setReady(true);
   }, []);
@@ -36,28 +45,43 @@ export function CartProvider({ children }: { children: ReactNode }) {
     if (ready) localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
   }, [items, ready]);
 
-  const add: CartContextValue["add"] = (id, size, qty = 1) => {
+  const add: CartContextValue["add"] = (id, size, qty = 1, variant) => {
+    const color = variant ?? getProduct(id)?.color ?? "Unknown";
     setItems((cur) => {
-      const existing = cur.find((i) => i.id === id && i.size === size);
+      const existing = cur.find(
+        (i) => i.id === id && i.size === size && i.variant === color,
+      );
       if (existing) {
         return cur.map((i) =>
-          i.id === id && i.size === size ? { ...i, qty: i.qty + qty } : i,
+          i.id === id && i.size === size && i.variant === color
+            ? { ...i, qty: i.qty + qty }
+            : i,
         );
       }
-      return [...cur, { id, size, qty }];
+      return [...cur, { id, size, qty, variant: color }];
     });
   };
 
-  const setQty: CartContextValue["setQty"] = (id, size, qty) => {
+  const setQty: CartContextValue["setQty"] = (id, size, qty, variant) => {
     setItems((cur) =>
       qty <= 0
-        ? cur.filter((i) => !(i.id === id && i.size === size))
-        : cur.map((i) => (i.id === id && i.size === size ? { ...i, qty } : i)),
+        ? cur.filter(
+            (i) => !(i.id === id && i.size === size && i.variant === variant),
+          )
+        : cur.map((i) =>
+            i.id === id && i.size === size && i.variant === variant
+              ? { ...i, qty }
+              : i,
+          ),
     );
   };
 
-  const remove: CartContextValue["remove"] = (id, size) =>
-    setItems((cur) => cur.filter((i) => !(i.id === id && i.size === size)));
+  const remove: CartContextValue["remove"] = (id, size, variant) =>
+    setItems((cur) =>
+      cur.filter(
+        (i) => !(i.id === id && i.size === size && i.variant === variant),
+      ),
+    );
 
   const clear = () => setItems([]);
 
