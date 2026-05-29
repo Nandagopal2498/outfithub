@@ -90,7 +90,7 @@ function CartPage() {
                             {item.qty}
                           </span>
                           <button
-                            onClick={() => setQty(item.id, item.size, item.qty + 1)}
+                            onClick={() => setQty(item.id, item.size, item.qty + 1, item.variant)}
                             className="p-2 hover:bg-surface"
                             aria-label="Increase"
                           >
