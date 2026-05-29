@@ -45,7 +45,7 @@ function CartPage() {
                 if (!product) return null;
                 return (
                   <div
-                    key={`${item.id}-${item.size}`}
+                    key={`${item.id}-${item.size}-${item.variant}`}
                     className="flex gap-4 md:gap-6 py-6 border-b border-border"
                   >
                     <Link
