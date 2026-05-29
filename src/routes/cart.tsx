@@ -54,7 +54,7 @@ function CartPage() {
                       className="w-24 md:w-32 aspect-[3/4] bg-surface overflow-hidden shrink-0"
                     >
                       <img
-                        src={product.image}
+                        src={product.variants.find((v) => v.name === item.variant)?.image ?? product.image}
                         alt={product.name}
                         className="w-full h-full object-cover"
                       />
