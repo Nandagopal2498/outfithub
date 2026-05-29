@@ -80,7 +80,7 @@ function CartPage() {
                       <div className="mt-auto flex items-center justify-between gap-3">
                         <div className="flex items-center border border-border">
                           <button
-                            onClick={() => setQty(item.id, item.size, item.qty - 1)}
+                            onClick={() => setQty(item.id, item.size, item.qty - 1, item.variant)}
                             className="p-2 hover:bg-surface"
                             aria-label="Decrease"
                           >
