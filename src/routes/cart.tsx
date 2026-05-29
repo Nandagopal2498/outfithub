@@ -70,7 +70,7 @@ function CartPage() {
                           </p>
                         </div>
                         <button
-                          onClick={() => remove(item.id, item.size)}
+                          onClick={() => remove(item.id, item.size, item.variant)}
                           aria-label="Remove"
                           className="text-muted-foreground hover:text-foreground"
                         >
