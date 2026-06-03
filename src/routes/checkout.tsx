@@ -151,7 +151,16 @@ function CheckoutPage() {
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-xs font-bold uppercase tracking-tight truncate">{p.name}</p>
-                      <p className="text-[11px] text-muted-foreground">{item.variant} · {item.size}</p>
+                      <div className="flex items-center gap-1.5 mt-1">
+                        <span
+                          className="inline-block w-2.5 h-2.5 rounded-full border border-border"
+                          style={{
+                            backgroundColor:
+                              p.variants.find((v) => v.name === item.variant)?.swatch ?? "transparent",
+                          }}
+                        />
+                        <span className="text-[11px] text-muted-foreground">{item.variant} · {item.size}</span>
+                      </div>
                     </div>
                     <span className="text-xs font-bold">${(p.price * item.qty).toFixed(2)}</span>
                   </li>
