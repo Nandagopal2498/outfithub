@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Minus, Plus, X } from "lucide-react";
+import { useState } from "react";
 import { useCart } from "@/lib/cart";
 import { getProduct } from "@/lib/products";
 
@@ -87,25 +88,12 @@ function CartPage() {
                         </button>
                       </div>
                       <div className="mt-auto flex items-center justify-between gap-3">
-                        <div className="flex items-center border border-border">
-                          <button
-                            onClick={() => setQty(item.id, item.size, item.qty - 1, item.variant)}
-                            className="p-2 hover:bg-surface"
-                            aria-label="Decrease"
-                          >
-                            <Minus className="size-3" />
-                          </button>
-                          <span className="w-10 text-center text-xs font-bold">
-                            {item.qty}
-                          </span>
-                          <button
-                            onClick={() => setQty(item.id, item.size, item.qty + 1, item.variant)}
-                            className="p-2 hover:bg-surface"
-                            aria-label="Increase"
-                          >
-                            <Plus className="size-3" />
-                          </button>
-                        </div>
+                        <QuantityStepper
+                          value={item.qty}
+                          onChange={(qty) => setQty(item.id, item.size, qty, item.variant)}
+                          min={1}
+                          max={10}
+                        />
                         <span className="text-sm font-bold">
                           ${(product.price * item.qty).toFixed(2)}
                         </span>
@@ -152,6 +140,77 @@ function CartPage() {
           </aside>
         </div>
       )}
+    </div>
+  );
+}
+
+function QuantityStepper({
+  value,
+  onChange,
+  min = 1,
+  max = 10,
+}: {
+  value: number;
+  onChange: (qty: number) => void;
+  min?: number;
+  max?: number;
+}) {
+  const [editing, setEditing] = useState(false);
+  const [inputValue, setInputValue] = useState(String(value));
+
+  const commit = (raw: string) => {
+    const n = parseInt(raw, 10);
+    if (!Number.isNaN(n)) {
+      onChange(Math.max(min, Math.min(max, n)));
+    }
+    setEditing(false);
+  };
+
+  return (
+    <div className="flex items-center border border-border overflow-hidden">
+      <button
+        onClick={() => onChange(Math.max(min, value - 1))}
+        disabled={value <= min}
+        className="p-2.5 hover:bg-surface disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+        aria-label="Decrease quantity"
+      >
+        <Minus className="size-3" />
+      </button>
+      {editing ? (
+        <input
+          type="number"
+          min={min}
+          max={max}
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          onBlur={() => commit(inputValue)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") commit(inputValue);
+            if (e.key === "Escape") setEditing(false);
+          }}
+          className="w-10 text-center text-xs font-bold tabular-nums bg-transparent focus:outline-none appearance-none [-moz-appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+          autoFocus
+        />
+      ) : (
+        <button
+          onClick={() => {
+            setInputValue(String(value));
+            setEditing(true);
+          }}
+          className="w-10 text-center text-xs font-bold tabular-nums select-none hover:bg-surface transition-colors py-2.5"
+          aria-label={`Current quantity is ${value}. Click to edit.`}
+        >
+          {value}
+        </button>
+      )}
+      <button
+        onClick={() => onChange(Math.min(max, value + 1))}
+        disabled={value >= max}
+        className="p-2.5 hover:bg-surface disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+        aria-label="Increase quantity"
+      >
+        <Plus className="size-3" />
+      </button>
     </div>
   );
 }
