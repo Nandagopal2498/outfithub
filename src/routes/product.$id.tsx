@@ -40,7 +40,13 @@ function ProductPage() {
   const { has, toggle } = useWishlist();
   const saved = has(product.id);
   const [size, setSize] = useState(product.sizes[0]);
-  const [activeMedia, setActiveMedia] = useState(product.image);
+  const initialVariantIdx = Math.max(
+    0,
+    product.variants.findIndex((v) => v.name === product.color),
+  );
+  const [selectedVariant, setSelectedVariant] = useState(initialVariantIdx);
+  const activeVariant = product.variants[selectedVariant];
+  const [activeMedia, setActiveMedia] = useState(activeVariant.image);
   const [added, setAdded] = useState(false);
   const mainVideoRef = useRef<HTMLVideoElement>(null);
   const isVideoActive = activeMedia === product.video;
@@ -49,8 +55,13 @@ function ProductPage() {
     (p) => p.category === product.category && p.id !== product.id,
   );
 
+  const handleSelectVariant = (i: number) => {
+    setSelectedVariant(i);
+    setActiveMedia(product.variants[i].image);
+  };
+
   const handleAdd = () => {
-    add(product.id, size, 1);
+    add(product.id, size, 1, activeVariant.name);
     setAdded(true);
     setTimeout(() => setAdded(false), 1800);
   };
