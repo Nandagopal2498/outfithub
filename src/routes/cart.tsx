@@ -65,9 +65,18 @@ function CartPage() {
                           <h3 className="text-sm font-bold uppercase tracking-tight">
                             {product.name}
                           </h3>
-                          <p className="text-xs text-muted-foreground mt-1">
-                            {item.variant} · Size {item.size}
-                          </p>
+                          <div className="flex items-center gap-2 mt-1.5">
+                            <span
+                              className="inline-block w-3 h-3 rounded-full border border-border"
+                              style={{
+                                backgroundColor:
+                                  product.variants.find((v) => v.name === item.variant)?.swatch ?? "transparent",
+                              }}
+                            />
+                            <span className="text-xs text-muted-foreground">
+                              {item.variant} · Size {item.size}
+                            </span>
+                          </div>
                         </div>
                         <button
                           onClick={() => remove(item.id, item.size, item.variant)}
