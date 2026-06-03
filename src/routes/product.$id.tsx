@@ -158,6 +158,32 @@ function ProductPage() {
             {product.description}
           </p>
 
+          {product.variants.length > 1 && (
+            <div className="mb-8">
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="label-eyebrow">Color</h3>
+                <span className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
+                  {activeVariant.name}
+                </span>
+              </div>
+              <div className="flex items-center gap-2.5">
+                {product.variants.map((v, i) => (
+                  <button
+                    key={v.name}
+                    type="button"
+                    onClick={() => handleSelectVariant(i)}
+                    aria-label={`Select ${v.name}`}
+                    aria-pressed={selectedVariant === i}
+                    className={`w-9 h-9 rounded-full border-2 transition-transform hover:scale-110 ${
+                      selectedVariant === i ? "border-foreground scale-110" : "border-border"
+                    }`}
+                    style={{ backgroundColor: v.swatch }}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
+
           <div className="mb-8">
             <div className="flex items-center justify-between mb-3">
               <h3 className="label-eyebrow">Size</h3>
