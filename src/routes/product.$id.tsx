@@ -40,7 +40,13 @@ function ProductPage() {
   const { has, toggle } = useWishlist();
   const saved = has(product.id);
   const [size, setSize] = useState(product.sizes[0]);
-  const [activeMedia, setActiveMedia] = useState(product.image);
+  const initialVariantIdx = Math.max(
+    0,
+    product.variants.findIndex((v: { name: string }) => v.name === product.color),
+  );
+  const [selectedVariant, setSelectedVariant] = useState(initialVariantIdx);
+  const activeVariant = product.variants[selectedVariant];
+  const [activeMedia, setActiveMedia] = useState(activeVariant.image);
   const [added, setAdded] = useState(false);
   const mainVideoRef = useRef<HTMLVideoElement>(null);
   const isVideoActive = activeMedia === product.video;
@@ -49,8 +55,13 @@ function ProductPage() {
     (p) => p.category === product.category && p.id !== product.id,
   );
 
+  const handleSelectVariant = (i: number) => {
+    setSelectedVariant(i);
+    setActiveMedia(product.variants[i].image);
+  };
+
   const handleAdd = () => {
-    add(product.id, size, 1);
+    add(product.id, size, 1, activeVariant.name);
     setAdded(true);
     setTimeout(() => setAdded(false), 1800);
   };
@@ -125,7 +136,7 @@ function ProductPage() {
           <h1 className="text-3xl md:text-4xl text-display leading-[0.95] mb-2">
             {product.name}
           </h1>
-          <p className="text-sm text-muted-foreground mb-5">{product.color}</p>
+          <p className="text-sm text-muted-foreground mb-5">{activeVariant.name}</p>
 
           <div className="flex items-center gap-3 mb-8">
             <div className="flex">
@@ -146,6 +157,32 @@ function ProductPage() {
           <p className="text-sm text-muted-foreground leading-relaxed mb-10">
             {product.description}
           </p>
+
+          {product.variants.length > 1 && (
+            <div className="mb-8">
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="label-eyebrow">Color</h3>
+                <span className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
+                  {activeVariant.name}
+                </span>
+              </div>
+              <div className="flex items-center gap-2.5">
+                {product.variants.map((v: { name: string; swatch: string }, i: number) => (
+                  <button
+                    key={v.name}
+                    type="button"
+                    onClick={() => handleSelectVariant(i)}
+                    aria-label={`Select ${v.name}`}
+                    aria-pressed={selectedVariant === i}
+                    className={`w-9 h-9 rounded-full border-2 transition-transform hover:scale-110 ${
+                      selectedVariant === i ? "border-foreground scale-110" : "border-border"
+                    }`}
+                    style={{ backgroundColor: v.swatch }}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
 
           <div className="mb-8">
             <div className="flex items-center justify-between mb-3">
