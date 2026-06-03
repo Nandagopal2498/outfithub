@@ -42,7 +42,7 @@ function ProductPage() {
   const [size, setSize] = useState(product.sizes[0]);
   const initialVariantIdx = Math.max(
     0,
-    product.variants.findIndex((v) => v.name === product.color),
+    product.variants.findIndex((v: { name: string }) => v.name === product.color),
   );
   const [selectedVariant, setSelectedVariant] = useState(initialVariantIdx);
   const activeVariant = product.variants[selectedVariant];
