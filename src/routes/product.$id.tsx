@@ -136,7 +136,7 @@ function ProductPage() {
           <h1 className="text-3xl md:text-4xl text-display leading-[0.95] mb-2">
             {product.name}
           </h1>
-          <p className="text-sm text-muted-foreground mb-5">{product.color}</p>
+          <p className="text-sm text-muted-foreground mb-5">{activeVariant.name}</p>
 
           <div className="flex items-center gap-3 mb-8">
             <div className="flex">
