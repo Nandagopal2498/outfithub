@@ -167,7 +167,7 @@ function ProductPage() {
                 </span>
               </div>
               <div className="flex items-center gap-2.5">
-                {product.variants.map((v, i) => (
+                {product.variants.map((v: { name: string; swatch: string }, i: number) => (
                   <button
                     key={v.name}
                     type="button"
