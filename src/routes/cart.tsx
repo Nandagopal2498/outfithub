@@ -87,21 +87,22 @@ function CartPage() {
                         </button>
                       </div>
                       <div className="mt-auto flex items-center justify-between gap-3">
-                        <div className="flex items-center border border-border">
+                        <div className="flex items-center border border-border overflow-hidden">
                           <button
                             onClick={() => setQty(item.id, item.size, item.qty - 1, item.variant)}
-                            className="p-2 hover:bg-surface"
-                            aria-label="Decrease"
+                            disabled={item.qty <= 1}
+                            className="p-2.5 hover:bg-surface disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                            aria-label="Decrease quantity"
                           >
                             <Minus className="size-3" />
                           </button>
-                          <span className="w-10 text-center text-xs font-bold">
+                          <span className="w-10 text-center text-xs font-bold tabular-nums select-none">
                             {item.qty}
                           </span>
                           <button
                             onClick={() => setQty(item.id, item.size, item.qty + 1, item.variant)}
-                            className="p-2 hover:bg-surface"
-                            aria-label="Increase"
+                            className="p-2.5 hover:bg-surface transition-colors"
+                            aria-label="Increase quantity"
                           >
                             <Plus className="size-3" />
                           </button>
