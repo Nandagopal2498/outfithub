@@ -1,3 +1,4 @@
+// Original assets
 import tee1 from "@/assets/products/tee-1.jpg";
 import tee2 from "@/assets/products/tee-2.jpg";
 import hoodie1 from "@/assets/products/hoodie-1.jpg";
@@ -10,6 +11,58 @@ import teeVideo from "@/assets/products/tee-video.mp4.asset.json";
 import hoodieVideo from "@/assets/products/hoodie-video.mp4.asset.json";
 import shoeVideo from "@/assets/products/shoe-video.mp4.asset.json";
 import watchVideo from "@/assets/products/watch-video.mp4.asset.json";
+
+// New tees
+import teePocketSand from "@/assets/products/tee-pocket-sand.jpg";
+import teeBoxyBone from "@/assets/products/tee-boxy-bone.jpg";
+import teeLongsleeveBlack from "@/assets/products/tee-longsleeve-black.jpg";
+import teeGraphicStone from "@/assets/products/tee-graphic-stone.jpg";
+import teeRingerCream from "@/assets/products/tee-ringer-cream.jpg";
+import teeVneckWhite from "@/assets/products/tee-vneck-white.jpg";
+import teeHenleyClay from "@/assets/products/tee-henley-clay.jpg";
+import teeStripeNavy from "@/assets/products/tee-stripe-navy.jpg";
+import teeRaglanCharcoal from "@/assets/products/tee-raglan-charcoal.jpg";
+import teeOversizedOlive from "@/assets/products/tee-oversized-olive.jpg";
+
+// New hoodies
+import hoodieZipBlack from "@/assets/products/hoodie-zip-black.jpg";
+import hoodieCroppedBone from "@/assets/products/hoodie-cropped-bone.jpg";
+import hoodieOversizedCharcoal from "@/assets/products/hoodie-oversized-charcoal.jpg";
+import hoodieTechOlive from "@/assets/products/hoodie-tech-olive.jpg";
+import hoodieQuarterzipNavy from "@/assets/products/hoodie-quarterzip-navy.jpg";
+import hoodieHeavyCream from "@/assets/products/hoodie-heavy-cream.jpg";
+import hoodieLightSand from "@/assets/products/hoodie-light-sand.jpg";
+import hoodieTerryRust from "@/assets/products/hoodie-terry-rust.jpg";
+import hoodieZipGrey from "@/assets/products/hoodie-zip-grey.jpg";
+import hoodiePulloverForest from "@/assets/products/hoodie-pullover-forest.jpg";
+import hoodieSherpaTan from "@/assets/products/hoodie-sherpa-tan.jpg";
+import hoodieMinimalWhite from "@/assets/products/hoodie-minimal-white.jpg";
+
+// New shoes
+import shoeCourtWhite from "@/assets/products/shoe-court-white.jpg";
+import shoeTrailSand from "@/assets/products/shoe-trail-sand.jpg";
+import shoeChelseaBlack from "@/assets/products/shoe-chelsea-black.jpg";
+import shoeDerbyTan from "@/assets/products/shoe-derby-tan.jpg";
+import shoeSliponGrey from "@/assets/products/shoe-slipon-grey.jpg";
+import shoeHikingBrown from "@/assets/products/shoe-hiking-brown.jpg";
+import shoeLoaferOlive from "@/assets/products/shoe-loafer-olive.jpg";
+import shoeHightopCream from "@/assets/products/shoe-hightop-cream.jpg";
+import shoeRaceRed from "@/assets/products/shoe-race-red.jpg";
+import shoeRunningGrey from "@/assets/products/shoe-running-grey.jpg";
+import shoeBoatNavy from "@/assets/products/shoe-boat-navy.jpg";
+import shoeSandalTan from "@/assets/products/shoe-sandal-tan.jpg";
+
+// New watches
+import watchDiverBlue from "@/assets/products/watch-diver-blue.jpg";
+import watchPilotBlack from "@/assets/products/watch-pilot-black.jpg";
+import watchDressGold from "@/assets/products/watch-dress-gold.jpg";
+import watchGmtGreen from "@/assets/products/watch-gmt-green.jpg";
+import watchDigitalGrey from "@/assets/products/watch-digital-grey.jpg";
+import watchMoonCream from "@/assets/products/watch-moon-cream.jpg";
+import watchSportOrange from "@/assets/products/watch-sport-orange.jpg";
+import watchSkeletonSilver from "@/assets/products/watch-skeleton-silver.jpg";
+import watchRacingWhite from "@/assets/products/watch-racing-white.jpg";
+import watchMinimalTan from "@/assets/products/watch-minimal-tan.jpg";
 
 export type Category = "tees" | "hoodies" | "shoes" | "watches";
 
@@ -42,7 +95,7 @@ const shoeSizes = ["8", "9", "10", "11", "12"];
 const watchSizes = ["One Size"];
 
 export const products: Product[] = [
-  // ───────── TEES (10) ─────────
+  // ───────── TEES (12) ─────────
   {
     id: "core-tee-white",
     name: "Core Heavyweight Tee",
@@ -61,7 +114,6 @@ export const products: Product[] = [
     variants: [
       { name: "Optic White", swatch: "#f5f3ee", image: tee1 },
       { name: "Onyx Black", swatch: "#0d0d0d", image: tee2 },
-      { name: "Stone Grey", swatch: "#8a8780", image: tee1 },
     ],
   },
   {
@@ -89,18 +141,14 @@ export const products: Product[] = [
     color: "Sand",
     price: 55,
     category: "tees",
-    image: tee1,
-    altImage: tee2,
-    video: teeVideo.url,
+    image: teePocketSand,
+    altImage: teePocketSand,
     rating: 4,
     reviews: 62,
     description:
       "Lightweight 180gsm jersey with a chest pocket and clean topstitching. Everyday cut.",
     sizes: tshirtSizes,
-    variants: [
-      { name: "Sand", swatch: "#c9b99a", image: tee1 },
-      { name: "Onyx Black", swatch: "#0d0d0d", image: tee2 },
-    ],
+    variants: [{ name: "Sand", swatch: "#e8d8b8", image: teePocketSand }],
   },
   {
     id: "boxy-tee-bone",
@@ -108,17 +156,14 @@ export const products: Product[] = [
     color: "Bone",
     price: 70,
     category: "tees",
-    image: tee2,
-    altImage: tee1,
+    image: teeBoxyBone,
+    altImage: teeBoxyBone,
     rating: 5,
     reviews: 41,
     description:
       "Dropped shoulder boxy crew with a dense rib collar. Built to hold shape after years of wear.",
     sizes: tshirtSizes,
-    variants: [
-      { name: "Bone", swatch: "#e8e3da", image: tee2 },
-      { name: "Onyx Black", swatch: "#0d0d0d", image: tee1 },
-    ],
+    variants: [{ name: "Bone", swatch: "#f1eadb", image: teeBoxyBone }],
   },
   {
     id: "long-sleeve-tee-black",
@@ -126,18 +171,15 @@ export const products: Product[] = [
     color: "Onyx Black",
     price: 85,
     category: "tees",
-    image: tee2,
-    altImage: tee1,
+    image: teeLongsleeveBlack,
+    altImage: teeLongsleeveBlack,
     rating: 5,
     reviews: 73,
     badge: "New",
     description:
       "Heavy cotton long sleeve with cuffed wrists. Designed to be layered or worn alone.",
     sizes: tshirtSizes,
-    variants: [
-      { name: "Onyx Black", swatch: "#0d0d0d", image: tee2 },
-      { name: "Optic White", swatch: "#f5f3ee", image: tee1 },
-    ],
+    variants: [{ name: "Onyx Black", swatch: "#0d0d0d", image: teeLongsleeveBlack }],
   },
   {
     id: "graphic-tee-stone",
@@ -145,17 +187,14 @@ export const products: Product[] = [
     color: "Stone Grey",
     price: 75,
     category: "tees",
-    image: tee1,
-    altImage: tee2,
+    image: teeGraphicStone,
+    altImage: teeGraphicStone,
     rating: 4,
     reviews: 57,
     description:
       "Garment-dyed cotton with a discreet rubberized chest print. Subtle branding done right.",
     sizes: tshirtSizes,
-    variants: [
-      { name: "Stone Grey", swatch: "#8a8780", image: tee1 },
-      { name: "Onyx Black", swatch: "#0d0d0d", image: tee2 },
-    ],
+    variants: [{ name: "Stone Grey", swatch: "#cfcabe", image: teeGraphicStone }],
   },
   {
     id: "ringer-tee-cream",
@@ -163,17 +202,14 @@ export const products: Product[] = [
     color: "Cream",
     price: 60,
     category: "tees",
-    image: tee2,
-    altImage: tee1,
+    image: teeRingerCream,
+    altImage: teeRingerCream,
     rating: 4,
     reviews: 38,
     description:
       "Retro contrast ribbing at the collar and cuffs on a soft combed cotton body.",
     sizes: tshirtSizes,
-    variants: [
-      { name: "Cream", swatch: "#f0ebe0", image: tee2 },
-      { name: "Onyx Black", swatch: "#0d0d0d", image: tee1 },
-    ],
+    variants: [{ name: "Cream", swatch: "#f5ebd6", image: teeRingerCream }],
   },
   {
     id: "v-neck-tee-white",
@@ -181,17 +217,14 @@ export const products: Product[] = [
     color: "Optic White",
     price: 50,
     category: "tees",
-    image: tee1,
-    altImage: tee2,
+    image: teeVneckWhite,
+    altImage: teeVneckWhite,
     rating: 4,
     reviews: 29,
     description:
       "Mid-weight pima cotton v-neck. Refined, breathable, made for warmer days.",
     sizes: tshirtSizes,
-    variants: [
-      { name: "Optic White", swatch: "#f5f3ee", image: tee1 },
-      { name: "Stone Grey", swatch: "#8a8780", image: tee2 },
-    ],
+    variants: [{ name: "Optic White", swatch: "#f5f3ee", image: teeVneckWhite }],
   },
   {
     id: "henley-tee-clay",
@@ -199,17 +232,14 @@ export const products: Product[] = [
     color: "Clay",
     price: 80,
     category: "tees",
-    image: tee2,
-    altImage: tee1,
+    image: teeHenleyClay,
+    altImage: teeHenleyClay,
     rating: 5,
     reviews: 51,
     description:
       "Three-button placket with a rib-knit collar. A classic warm-weather staple in muted clay.",
     sizes: tshirtSizes,
-    variants: [
-      { name: "Clay", swatch: "#b07a5a", image: tee2 },
-      { name: "Optic White", swatch: "#f5f3ee", image: tee1 },
-    ],
+    variants: [{ name: "Clay", swatch: "#a85a3e", image: teeHenleyClay }],
   },
   {
     id: "striped-tee-navy",
@@ -217,20 +247,48 @@ export const products: Product[] = [
     color: "Deep Navy",
     price: 70,
     category: "tees",
-    image: tee1,
-    altImage: tee2,
+    image: teeStripeNavy,
+    altImage: teeStripeNavy,
     rating: 5,
     reviews: 44,
     description:
       "Heritage breton stripe in dense cotton jersey. Effortless, year-round.",
     sizes: tshirtSizes,
-    variants: [
-      { name: "Deep Navy", swatch: "#1b2a4a", image: tee1 },
-      { name: "Onyx Black", swatch: "#0d0d0d", image: tee2 },
-    ],
+    variants: [{ name: "Deep Navy", swatch: "#1b2a4a", image: teeStripeNavy }],
+  },
+  {
+    id: "raglan-tee-charcoal",
+    name: "Raglan Baseball Tee",
+    color: "Charcoal",
+    price: 72,
+    category: "tees",
+    image: teeRaglanCharcoal,
+    altImage: teeRaglanCharcoal,
+    rating: 4,
+    reviews: 26,
+    description:
+      "Heather charcoal body with contrast black raglan sleeves. A nod to dugout classics.",
+    sizes: tshirtSizes,
+    variants: [{ name: "Charcoal", swatch: "#5a5a5e", image: teeRaglanCharcoal }],
+  },
+  {
+    id: "oversized-tee-olive",
+    name: "Oversized Drop-Shoulder Tee",
+    color: "Olive",
+    price: 78,
+    category: "tees",
+    image: teeOversizedOlive,
+    altImage: teeOversizedOlive,
+    rating: 5,
+    reviews: 64,
+    badge: "New",
+    description:
+      "Drop-shoulder oversized fit in heavy garment-washed cotton.",
+    sizes: tshirtSizes,
+    variants: [{ name: "Olive", swatch: "#828c5a", image: teeOversizedOlive }],
   },
 
-  // ───────── HOODIES (6) ─────────
+  // ───────── HOODIES (14) ─────────
   {
     id: "fleece-hoodie-black",
     name: "Core Fleece Hoodie",
@@ -244,12 +302,11 @@ export const products: Product[] = [
     reviews: 212,
     badge: "Best Seller",
     description:
-      "Heavyweight 450gsm brushed-back fleece with double-lined hood and ribbed cuffs. Engineered for daily layering.",
+      "Heavyweight 450gsm brushed-back fleece with double-lined hood and ribbed cuffs.",
     sizes: hoodieSizes,
     variants: [
       { name: "Onyx Black", swatch: "#0d0d0d", image: hoodie1 },
       { name: "Stone Grey", swatch: "#8a8780", image: hoodie2 },
-      { name: "Bone", swatch: "#e8e3da", image: hoodie2 },
     ],
   },
   {
@@ -277,18 +334,15 @@ export const products: Product[] = [
     color: "Onyx Black",
     price: 175,
     category: "hoodies",
-    image: hoodie1,
-    altImage: hoodie2,
+    image: hoodieZipBlack,
+    altImage: hoodieZipBlack,
     rating: 5,
     reviews: 96,
     badge: "New",
     description:
       "Brushed-back fleece full-zip with YKK hardware and kangaroo pockets. The everyday layer.",
     sizes: hoodieSizes,
-    variants: [
-      { name: "Onyx Black", swatch: "#0d0d0d", image: hoodie1 },
-      { name: "Stone Grey", swatch: "#8a8780", image: hoodie2 },
-    ],
+    variants: [{ name: "Onyx Black", swatch: "#0d0d0d", image: hoodieZipBlack }],
   },
   {
     id: "cropped-hoodie-bone",
@@ -296,17 +350,14 @@ export const products: Product[] = [
     color: "Bone",
     price: 135,
     category: "hoodies",
-    image: hoodie2,
-    altImage: hoodie1,
+    image: hoodieCroppedBone,
+    altImage: hoodieCroppedBone,
     rating: 4,
     reviews: 33,
     description:
       "Shortened hem and boxy fit. Soft loopback cotton in warm bone.",
     sizes: hoodieSizes,
-    variants: [
-      { name: "Bone", swatch: "#e8e3da", image: hoodie2 },
-      { name: "Onyx Black", swatch: "#0d0d0d", image: hoodie1 },
-    ],
+    variants: [{ name: "Bone", swatch: "#f1eadb", image: hoodieCroppedBone }],
   },
   {
     id: "oversized-hoodie-charcoal",
@@ -314,17 +365,14 @@ export const products: Product[] = [
     color: "Charcoal",
     price: 155,
     category: "hoodies",
-    image: hoodie1,
-    altImage: hoodie2,
+    image: hoodieOversizedCharcoal,
+    altImage: hoodieOversizedCharcoal,
     rating: 5,
     reviews: 78,
     description:
       "Drop-shoulder oversized fit, 500gsm brushed fleece. Built like outerwear.",
     sizes: hoodieSizes,
-    variants: [
-      { name: "Charcoal", swatch: "#36363a", image: hoodie1 },
-      { name: "Stone Grey", swatch: "#8a8780", image: hoodie2 },
-    ],
+    variants: [{ name: "Charcoal", swatch: "#36363a", image: hoodieOversizedCharcoal }],
   },
   {
     id: "tech-hoodie-olive",
@@ -332,21 +380,140 @@ export const products: Product[] = [
     color: "Olive",
     price: 190,
     category: "hoodies",
-    image: hoodie2,
-    altImage: hoodie1,
+    image: hoodieTechOlive,
+    altImage: hoodieTechOlive,
     rating: 5,
     reviews: 52,
     badge: "Limited",
     description:
       "Water-resistant technical shell with a fleece-lined hood. For unpredictable city weather.",
     sizes: hoodieSizes,
-    variants: [
-      { name: "Olive", swatch: "#4a5040", image: hoodie2 },
-      { name: "Onyx Black", swatch: "#0d0d0d", image: hoodie1 },
-    ],
+    variants: [{ name: "Olive", swatch: "#4a5040", image: hoodieTechOlive }],
+  },
+  {
+    id: "quarter-zip-navy",
+    name: "Quarter-Zip Pullover",
+    color: "Deep Navy",
+    price: 150,
+    category: "hoodies",
+    image: hoodieQuarterzipNavy,
+    altImage: hoodieQuarterzipNavy,
+    rating: 4,
+    reviews: 31,
+    description:
+      "Stand-collar quarter-zip in dense loopback cotton. A refined alternative to the pullover.",
+    sizes: hoodieSizes,
+    variants: [{ name: "Deep Navy", swatch: "#1b2a4a", image: hoodieQuarterzipNavy }],
+  },
+  {
+    id: "heavyweight-hoodie-cream",
+    name: "Heavyweight Pullover",
+    color: "Cream",
+    price: 180,
+    category: "hoodies",
+    image: hoodieHeavyCream,
+    altImage: hoodieHeavyCream,
+    rating: 5,
+    reviews: 42,
+    description:
+      "500gsm brushed fleece pullover with a dense rib hem. Built to last decades.",
+    sizes: hoodieSizes,
+    variants: [{ name: "Cream", swatch: "#f5ebd6", image: hoodieHeavyCream }],
+  },
+  {
+    id: "lightweight-hoodie-sand",
+    name: "Lightweight Hoodie",
+    color: "Sand",
+    price: 120,
+    category: "hoodies",
+    image: hoodieLightSand,
+    altImage: hoodieLightSand,
+    rating: 4,
+    reviews: 28,
+    description:
+      "Featherweight jersey pullover. Perfect transitional layer for warmer months.",
+    sizes: hoodieSizes,
+    variants: [{ name: "Sand", swatch: "#e8d8b8", image: hoodieLightSand }],
+  },
+  {
+    id: "terry-hoodie-rust",
+    name: "French Terry Hoodie",
+    color: "Rust",
+    price: 140,
+    category: "hoodies",
+    image: hoodieTerryRust,
+    altImage: hoodieTerryRust,
+    rating: 4,
+    reviews: 37,
+    badge: "New",
+    description:
+      "Looped french terry interior on a structured cotton body. Garment-dyed in rich rust.",
+    sizes: hoodieSizes,
+    variants: [{ name: "Rust", swatch: "#c45a2a", image: hoodieTerryRust }],
+  },
+  {
+    id: "zip-hoodie-grey",
+    name: "Heather Zip Hoodie",
+    color: "Heather Grey",
+    price: 160,
+    category: "hoodies",
+    image: hoodieZipGrey,
+    altImage: hoodieZipGrey,
+    rating: 4,
+    reviews: 56,
+    description:
+      "Heather-blended zip hoodie with twin-needle stitching. A classic refined.",
+    sizes: hoodieSizes,
+    variants: [{ name: "Heather Grey", swatch: "#a3a3a8", image: hoodieZipGrey }],
+  },
+  {
+    id: "pullover-hoodie-forest",
+    name: "Embroidered Pullover",
+    color: "Forest Green",
+    price: 155,
+    category: "hoodies",
+    image: hoodiePulloverForest,
+    altImage: hoodiePulloverForest,
+    rating: 5,
+    reviews: 44,
+    description:
+      "Mid-weight pullover with a tonal embroidered chest mark in forest green.",
+    sizes: hoodieSizes,
+    variants: [{ name: "Forest Green", swatch: "#1f3d2b", image: hoodiePulloverForest }],
+  },
+  {
+    id: "sherpa-hoodie-tan",
+    name: "Sherpa-Lined Hoodie",
+    color: "Tan",
+    price: 220,
+    category: "hoodies",
+    image: hoodieSherpaTan,
+    altImage: hoodieSherpaTan,
+    rating: 5,
+    reviews: 38,
+    badge: "Limited",
+    description:
+      "Cozy sherpa-lined hood and shoulders. Heavy cotton shell, built for winter.",
+    sizes: hoodieSizes,
+    variants: [{ name: "Tan", swatch: "#b97a3e", image: hoodieSherpaTan }],
+  },
+  {
+    id: "minimal-hoodie-white",
+    name: "Essential Pullover",
+    color: "Optic White",
+    price: 130,
+    category: "hoodies",
+    image: hoodieMinimalWhite,
+    altImage: hoodieMinimalWhite,
+    rating: 4,
+    reviews: 49,
+    description:
+      "Unbranded pullover in mid-weight loopback cotton. Quiet, considered, daily.",
+    sizes: hoodieSizes,
+    variants: [{ name: "Optic White", swatch: "#f5f3ee", image: hoodieMinimalWhite }],
   },
 
-  // ───────── SHOES (11) ─────────
+  // ───────── SHOES (14) ─────────
   {
     id: "nexus-trainer-white",
     name: "Nexus Trainer v1",
@@ -365,7 +532,6 @@ export const products: Product[] = [
     variants: [
       { name: "Arctic White", swatch: "#f5f3ee", image: shoe1 },
       { name: "Stealth Black", swatch: "#0d0d0d", image: shoe2 },
-      { name: "Sand", swatch: "#c9b99a", image: shoe1 },
     ],
   },
   {
@@ -393,17 +559,14 @@ export const products: Product[] = [
     color: "Optic White",
     price: 160,
     category: "shoes",
-    image: shoe1,
-    altImage: shoe2,
+    image: shoeCourtWhite,
+    altImage: shoeCourtWhite,
     rating: 4,
     reviews: 87,
     description:
       "Minimal court silhouette in soft tumbled leather. A clean modern classic.",
     sizes: shoeSizes,
-    variants: [
-      { name: "Optic White", swatch: "#f5f3ee", image: shoe1 },
-      { name: "Stealth Black", swatch: "#0d0d0d", image: shoe2 },
-    ],
+    variants: [{ name: "Optic White", swatch: "#f5f3ee", image: shoeCourtWhite }],
   },
   {
     id: "trail-runner-sand",
@@ -411,18 +574,15 @@ export const products: Product[] = [
     color: "Sand",
     price: 225,
     category: "shoes",
-    image: shoe2,
-    altImage: shoe1,
+    image: shoeTrailSand,
+    altImage: shoeTrailSand,
     rating: 5,
     reviews: 64,
     badge: "New",
     description:
-      "Lugged Vibram outsole and abrasion-resistant ripstop upper. From trail to terminal.",
+      "Lugged outsole and abrasion-resistant ripstop upper. From trail to terminal.",
     sizes: shoeSizes,
-    variants: [
-      { name: "Sand", swatch: "#c9b99a", image: shoe2 },
-      { name: "Stealth Black", swatch: "#0d0d0d", image: shoe1 },
-    ],
+    variants: [{ name: "Sand", swatch: "#c9b99a", image: shoeTrailSand }],
   },
   {
     id: "chelsea-boot-black",
@@ -430,17 +590,14 @@ export const products: Product[] = [
     color: "Onyx Black",
     price: 295,
     category: "shoes",
-    image: shoe1,
-    altImage: shoe2,
+    image: shoeChelseaBlack,
+    altImage: shoeChelseaBlack,
     rating: 5,
     reviews: 41,
     description:
       "Italian leather chelsea boot on a stacked leather sole. A wardrobe cornerstone.",
     sizes: shoeSizes,
-    variants: [
-      { name: "Onyx Black", swatch: "#0d0d0d", image: shoe1 },
-      { name: "Sand", swatch: "#c9b99a", image: shoe2 },
-    ],
+    variants: [{ name: "Onyx Black", swatch: "#0d0d0d", image: shoeChelseaBlack }],
   },
   {
     id: "derby-shoe-tan",
@@ -448,17 +605,14 @@ export const products: Product[] = [
     color: "Tan",
     price: 270,
     category: "shoes",
-    image: shoe2,
-    altImage: shoe1,
+    image: shoeDerbyTan,
+    altImage: shoeDerbyTan,
     rating: 4,
     reviews: 28,
     description:
       "Hand-finished tan leather derby with blake-stitched construction. Quiet dress sophistication.",
     sizes: shoeSizes,
-    variants: [
-      { name: "Tan", swatch: "#a17048", image: shoe2 },
-      { name: "Onyx Black", swatch: "#0d0d0d", image: shoe1 },
-    ],
+    variants: [{ name: "Tan", swatch: "#a17048", image: shoeDerbyTan }],
   },
   {
     id: "slip-on-canvas-grey",
@@ -466,17 +620,14 @@ export const products: Product[] = [
     color: "Stone Grey",
     price: 95,
     category: "shoes",
-    image: shoe1,
-    altImage: shoe2,
+    image: shoeSliponGrey,
+    altImage: shoeSliponGrey,
     rating: 4,
     reviews: 55,
     description:
       "Heavy canvas upper, vulcanized rubber sole. The summer essential.",
     sizes: shoeSizes,
-    variants: [
-      { name: "Stone Grey", swatch: "#8a8780", image: shoe1 },
-      { name: "Optic White", swatch: "#f5f3ee", image: shoe2 },
-    ],
+    variants: [{ name: "Stone Grey", swatch: "#8a8780", image: shoeSliponGrey }],
   },
   {
     id: "hiking-boot-brown",
@@ -484,18 +635,15 @@ export const products: Product[] = [
     color: "Walnut",
     price: 320,
     category: "shoes",
-    image: shoe2,
-    altImage: shoe1,
+    image: shoeHikingBrown,
+    altImage: shoeHikingBrown,
     rating: 5,
     reviews: 36,
     badge: "Limited",
     description:
-      "Waxed nubuck upper with Gore-Tex lining and lugged sole. Tested in alpine conditions.",
+      "Waxed nubuck upper with a lugged sole. Tested in alpine conditions.",
     sizes: shoeSizes,
-    variants: [
-      { name: "Walnut", swatch: "#6b4a32", image: shoe2 },
-      { name: "Stealth Black", swatch: "#0d0d0d", image: shoe1 },
-    ],
+    variants: [{ name: "Walnut", swatch: "#6b4a32", image: shoeHikingBrown }],
   },
   {
     id: "loafer-suede-olive",
@@ -503,17 +651,14 @@ export const products: Product[] = [
     color: "Olive Suede",
     price: 240,
     category: "shoes",
-    image: shoe1,
-    altImage: shoe2,
+    image: shoeLoaferOlive,
+    altImage: shoeLoaferOlive,
     rating: 4,
     reviews: 22,
     description:
       "Italian suede penny loafer with hand-stitched apron. Easy elegance.",
     sizes: shoeSizes,
-    variants: [
-      { name: "Olive Suede", swatch: "#4a5040", image: shoe1 },
-      { name: "Onyx Black", swatch: "#0d0d0d", image: shoe2 },
-    ],
+    variants: [{ name: "Olive Suede", swatch: "#4a5040", image: shoeLoaferOlive }],
   },
   {
     id: "high-top-cream",
@@ -521,17 +666,14 @@ export const products: Product[] = [
     color: "Cream",
     price: 180,
     category: "shoes",
-    image: shoe2,
-    altImage: shoe1,
+    image: shoeHightopCream,
+    altImage: shoeHightopCream,
     rating: 4,
     reviews: 47,
     description:
       "Mid-cut leather high-top with padded collar and gum sole.",
     sizes: shoeSizes,
-    variants: [
-      { name: "Cream", swatch: "#f0ebe0", image: shoe2 },
-      { name: "Onyx Black", swatch: "#0d0d0d", image: shoe1 },
-    ],
+    variants: [{ name: "Cream", swatch: "#f0ebe0", image: shoeHightopCream }],
   },
   {
     id: "race-flat-red",
@@ -539,21 +681,63 @@ export const products: Product[] = [
     color: "Signal Red",
     price: 205,
     category: "shoes",
-    image: shoe1,
-    altImage: shoe2,
+    image: shoeRaceRed,
+    altImage: shoeRaceRed,
     rating: 5,
     reviews: 31,
     badge: "New",
     description:
       "Carbon-plated race flat with responsive foam midsole. Race day ready.",
     sizes: shoeSizes,
-    variants: [
-      { name: "Signal Red", swatch: "#c0392b", image: shoe1 },
-      { name: "Stealth Black", swatch: "#0d0d0d", image: shoe2 },
-    ],
+    variants: [{ name: "Signal Red", swatch: "#c0392b", image: shoeRaceRed }],
+  },
+  {
+    id: "running-knit-grey",
+    name: "Knit Runner",
+    color: "Heather Grey",
+    price: 195,
+    category: "shoes",
+    image: shoeRunningGrey,
+    altImage: shoeRunningGrey,
+    rating: 4,
+    reviews: 58,
+    description:
+      "Engineered knit upper and chunky cushioned midsole. Daily-mile comfort.",
+    sizes: shoeSizes,
+    variants: [{ name: "Heather Grey", swatch: "#a3a3a8", image: shoeRunningGrey }],
+  },
+  {
+    id: "boat-shoe-navy",
+    name: "Deck Shoe",
+    color: "Deep Navy",
+    price: 175,
+    category: "shoes",
+    image: shoeBoatNavy,
+    altImage: shoeBoatNavy,
+    rating: 4,
+    reviews: 33,
+    description:
+      "Hand-sewn moccasin construction with 360 lacing and a siped white sole.",
+    sizes: shoeSizes,
+    variants: [{ name: "Deep Navy", swatch: "#1b2a4a", image: shoeBoatNavy }],
+  },
+  {
+    id: "sandal-leather-tan",
+    name: "Cork Slide Sandal",
+    color: "Tan",
+    price: 110,
+    category: "shoes",
+    image: shoeSandalTan,
+    altImage: shoeSandalTan,
+    rating: 4,
+    reviews: 24,
+    description:
+      "Veg-tan leather straps on a cork-latex footbed. Summer-ready.",
+    sizes: shoeSizes,
+    variants: [{ name: "Tan", swatch: "#b97a3e", image: shoeSandalTan }],
   },
 
-  // ───────── WATCHES (11) ─────────
+  // ───────── WATCHES (12) ─────────
   {
     id: "sector-04-watch",
     name: "Sector 04 Chronograph",
@@ -567,7 +751,7 @@ export const products: Product[] = [
     reviews: 28,
     badge: "Limited",
     description:
-      "42mm PVD-coated case with sapphire crystal and a Swiss chronograph movement. Built for measured precision.",
+      "42mm PVD-coated case with sapphire crystal and a Swiss chronograph movement.",
     sizes: watchSizes,
     variants: [
       { name: "Stealth Matte", swatch: "#1a1a1a", image: watch1 },
@@ -599,18 +783,15 @@ export const products: Product[] = [
     color: "Abyss Blue",
     price: 420,
     category: "watches",
-    image: watch1,
-    altImage: watch2,
+    image: watchDiverBlue,
+    altImage: watchDiverBlue,
     rating: 5,
     reviews: 67,
     badge: "New",
     description:
-      "200m water-resistant diver with unidirectional ceramic bezel and lumed indices.",
+      "200m water-resistant diver with unidirectional bezel and lumed indices.",
     sizes: watchSizes,
-    variants: [
-      { name: "Abyss Blue", swatch: "#0c2340", image: watch1 },
-      { name: "Stealth Matte", swatch: "#1a1a1a", image: watch2 },
-    ],
+    variants: [{ name: "Abyss Blue", swatch: "#0c2340", image: watchDiverBlue }],
   },
   {
     id: "pilot-chrono-black",
@@ -618,17 +799,14 @@ export const products: Product[] = [
     color: "Onyx Black",
     price: 380,
     category: "watches",
-    image: watch2,
-    altImage: watch1,
+    image: watchPilotBlack,
+    altImage: watchPilotBlack,
     rating: 5,
     reviews: 39,
     description:
-      "Aviation-inspired 44mm chronograph with oversized crown and matte black dial.",
+      "Aviation-inspired chronograph with oversized crown and matte black dial.",
     sizes: watchSizes,
-    variants: [
-      { name: "Onyx Black", swatch: "#0d0d0d", image: watch2 },
-      { name: "Brushed Steel", swatch: "#b8b8bd", image: watch1 },
-    ],
+    variants: [{ name: "Onyx Black", swatch: "#0d0d0d", image: watchPilotBlack }],
   },
   {
     id: "dress-watch-gold",
@@ -636,18 +814,15 @@ export const products: Product[] = [
     color: "Champagne Gold",
     price: 510,
     category: "watches",
-    image: watch1,
-    altImage: watch2,
+    image: watchDressGold,
+    altImage: watchDressGold,
     rating: 5,
     reviews: 22,
     badge: "Limited",
     description:
-      "7.2mm ultra-thin case with sunburst champagne dial and dauphine hands.",
+      "Ultra-thin case with sunburst champagne dial and dauphine hands.",
     sizes: watchSizes,
-    variants: [
-      { name: "Champagne Gold", swatch: "#c9a84c", image: watch1 },
-      { name: "Brushed Steel", swatch: "#b8b8bd", image: watch2 },
-    ],
+    variants: [{ name: "Champagne Gold", swatch: "#c9a84c", image: watchDressGold }],
   },
   {
     id: "gmt-traveler-green",
@@ -655,17 +830,14 @@ export const products: Product[] = [
     color: "Forest Green",
     price: 460,
     category: "watches",
-    image: watch2,
-    altImage: watch1,
+    image: watchGmtGreen,
+    altImage: watchGmtGreen,
     rating: 5,
     reviews: 48,
     description:
       "Dual time zone GMT with 24-hour bezel. Made for cross-meridian living.",
     sizes: watchSizes,
-    variants: [
-      { name: "Forest Green", swatch: "#1f3d2b", image: watch2 },
-      { name: "Stealth Matte", swatch: "#1a1a1a", image: watch1 },
-    ],
+    variants: [{ name: "Forest Green", swatch: "#1f3d2b", image: watchGmtGreen }],
   },
   {
     id: "digital-quartz-grey",
@@ -673,17 +845,14 @@ export const products: Product[] = [
     color: "Graphite",
     price: 145,
     category: "watches",
-    image: watch1,
-    altImage: watch2,
+    image: watchDigitalGrey,
+    altImage: watchDigitalGrey,
     rating: 4,
     reviews: 84,
     description:
       "Modern digital quartz with sapphire-coated glass and a resin-bonded case.",
     sizes: watchSizes,
-    variants: [
-      { name: "Graphite", swatch: "#3a3a3d", image: watch1 },
-      { name: "Onyx Black", swatch: "#0d0d0d", image: watch2 },
-    ],
+    variants: [{ name: "Graphite", swatch: "#3a3a3d", image: watchDigitalGrey }],
   },
   {
     id: "moonphase-cream",
@@ -691,17 +860,14 @@ export const products: Product[] = [
     color: "Cream",
     price: 590,
     category: "watches",
-    image: watch2,
-    altImage: watch1,
+    image: watchMoonCream,
+    altImage: watchMoonCream,
     rating: 5,
     reviews: 19,
     description:
       "Hand-finished moonphase complication on a warm cream dial. Heirloom-grade.",
     sizes: watchSizes,
-    variants: [
-      { name: "Cream", swatch: "#f0ebe0", image: watch2 },
-      { name: "Champagne Gold", swatch: "#c9a84c", image: watch1 },
-    ],
+    variants: [{ name: "Cream", swatch: "#f0ebe0", image: watchMoonCream }],
   },
   {
     id: "sport-rubber-orange",
@@ -709,18 +875,15 @@ export const products: Product[] = [
     color: "Signal Orange",
     price: 230,
     category: "watches",
-    image: watch1,
-    altImage: watch2,
+    image: watchSportOrange,
+    altImage: watchSportOrange,
     rating: 4,
     reviews: 53,
     badge: "New",
     description:
       "Lightweight titanium-on-rubber sport with luminous markers. Built for motion.",
     sizes: watchSizes,
-    variants: [
-      { name: "Signal Orange", swatch: "#e85d3a", image: watch1 },
-      { name: "Stealth Matte", swatch: "#1a1a1a", image: watch2 },
-    ],
+    variants: [{ name: "Signal Orange", swatch: "#e85d3a", image: watchSportOrange }],
   },
   {
     id: "skeleton-automatic-silver",
@@ -728,18 +891,15 @@ export const products: Product[] = [
     color: "Polished Silver",
     price: 640,
     category: "watches",
-    image: watch2,
-    altImage: watch1,
+    image: watchSkeletonSilver,
+    altImage: watchSkeletonSilver,
     rating: 5,
     reviews: 26,
     badge: "Limited",
     description:
       "Open-heart skeleton dial revealing a Swiss automatic movement. Engineering on display.",
     sizes: watchSizes,
-    variants: [
-      { name: "Polished Silver", swatch: "#d9d9dc", image: watch2 },
-      { name: "Stealth Matte", swatch: "#1a1a1a", image: watch1 },
-    ],
+    variants: [{ name: "Polished Silver", swatch: "#d9d9dc", image: watchSkeletonSilver }],
   },
   {
     id: "racing-chrono-white",
@@ -747,17 +907,29 @@ export const products: Product[] = [
     color: "Panda White",
     price: 410,
     category: "watches",
-    image: watch1,
-    altImage: watch2,
+    image: watchRacingWhite,
+    altImage: watchRacingWhite,
     rating: 5,
     reviews: 34,
     description:
       "Motorsport-inspired panda dial with tachymeter scale and pump pushers.",
     sizes: watchSizes,
-    variants: [
-      { name: "Panda White", swatch: "#f5f3ee", image: watch1 },
-      { name: "Onyx Black", swatch: "#0d0d0d", image: watch2 },
-    ],
+    variants: [{ name: "Panda White", swatch: "#f5f3ee", image: watchRacingWhite }],
+  },
+  {
+    id: "minimal-watch-tan",
+    name: "Minimal Dress Watch",
+    color: "Tan Strap",
+    price: 220,
+    category: "watches",
+    image: watchMinimalTan,
+    altImage: watchMinimalTan,
+    rating: 4,
+    reviews: 37,
+    description:
+      "Pared-back white dial with baton hands on a tan leather strap. Quiet design.",
+    sizes: watchSizes,
+    variants: [{ name: "Tan Strap", swatch: "#b97a3e", image: watchMinimalTan }],
   },
 ];
 
