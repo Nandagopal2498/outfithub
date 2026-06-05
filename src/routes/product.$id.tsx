@@ -26,7 +26,10 @@ export const Route = createFileRoute("/product/$id")({
   notFoundComponent: () => (
     <div className="py-32 text-center">
       <h1 className="text-display text-4xl">Product not found</h1>
-      <Link to="/shop" className="inline-block mt-6 text-xs font-bold uppercase tracking-widest border-b-2 border-foreground pb-1">
+      <Link
+        to="/shop"
+        className="inline-block mt-6 text-xs font-bold uppercase tracking-widest border-b-2 border-foreground pb-1"
+      >
         Back to Shop
       </Link>
     </div>
@@ -51,9 +54,7 @@ function ProductPage() {
   const mainVideoRef = useRef<HTMLVideoElement>(null);
   const isVideoActive = activeMedia === product.video;
 
-  const related = products.filter(
-    (p) => p.category === product.category && p.id !== product.id,
-  );
+  const related = products.filter((p) => p.category === product.category && p.id !== product.id);
 
   const handleSelectVariant = (i: number) => {
     setSelectedVariant(i);
@@ -70,9 +71,13 @@ function ProductPage() {
     <div>
       <div className="max-w-[1440px] mx-auto px-6 lg:px-8 pt-8">
         <nav className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground flex gap-2">
-          <Link to="/" className="hover:text-foreground">Home</Link>
+          <Link to="/" className="hover:text-foreground">
+            Home
+          </Link>
           <span>/</span>
-          <Link to="/shop" className="hover:text-foreground">Shop</Link>
+          <Link to="/shop" className="hover:text-foreground">
+            Shop
+          </Link>
           <span>/</span>
           <span className="text-foreground">{product.name}</span>
         </nav>
@@ -82,26 +87,33 @@ function ProductPage() {
         {/* Gallery */}
         <div className="lg:col-span-7 grid grid-cols-[80px_1fr] gap-4">
           <div className="flex flex-col gap-3">
-            {[product.image, product.altImage, ...(product.video ? [product.video] : [])].map((src) => (
-              <button
-                key={src}
-                onClick={() => setActiveMedia(src)}
-                className={`aspect-square overflow-hidden bg-surface border-2 transition-colors ${
-                  activeMedia === src ? "border-foreground" : "border-transparent"
-                }`}
-              >
-                {src === product.video ? (
-                  <div className="w-full h-full relative">
-                    <img src={product.image} alt="" className="w-full h-full object-cover" loading="lazy" />
-                    <div className="absolute inset-0 grid place-items-center bg-black/30">
-                      <Play className="size-5 text-white fill-white" />
+            {[product.image, product.altImage, ...(product.video ? [product.video] : [])].map(
+              (src) => (
+                <button
+                  key={src}
+                  onClick={() => setActiveMedia(src)}
+                  className={`aspect-square overflow-hidden bg-surface border-2 transition-colors ${
+                    activeMedia === src ? "border-foreground" : "border-transparent"
+                  }`}
+                >
+                  {src === product.video ? (
+                    <div className="w-full h-full relative">
+                      <img
+                        src={product.image}
+                        alt=""
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 grid place-items-center bg-black/30">
+                        <Play className="size-5 text-white fill-white" />
+                      </div>
                     </div>
-                  </div>
-                ) : (
-                  <img src={src} alt="" className="w-full h-full object-cover" loading="lazy" />
-                )}
-              </button>
-            ))}
+                  ) : (
+                    <img src={src} alt="" className="w-full h-full object-cover" loading="lazy" />
+                  )}
+                </button>
+              ),
+            )}
           </div>
           <div className="aspect-[4/5] overflow-hidden bg-surface">
             {isVideoActive && product.video ? (
@@ -133,9 +145,7 @@ function ProductPage() {
               {product.badge}
             </span>
           )}
-          <h1 className="text-3xl md:text-4xl text-display leading-[0.95] mb-2">
-            {product.name}
-          </h1>
+          <h1 className="text-3xl md:text-4xl text-display leading-[0.95] mb-2">{product.name}</h1>
           <p className="text-sm text-muted-foreground mb-5">{activeVariant.name}</p>
 
           <div className="flex items-center gap-3 mb-8">
@@ -236,7 +246,9 @@ function ProductPage() {
               <Recycle className="size-4 mt-0.5 shrink-0" strokeWidth={1.5} />
               <div>
                 <p className="text-xs font-bold uppercase tracking-widest">30 Day Returns</p>
-                <p className="text-xs text-muted-foreground mt-1">No questions asked, fully refundable.</p>
+                <p className="text-xs text-muted-foreground mt-1">
+                  No questions asked, fully refundable.
+                </p>
               </div>
             </div>
           </div>

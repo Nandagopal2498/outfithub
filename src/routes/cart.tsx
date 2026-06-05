@@ -55,7 +55,10 @@ function CartPage() {
                       className="w-24 md:w-32 aspect-[3/4] bg-surface overflow-hidden shrink-0"
                     >
                       <img
-                        src={product.variants.find((v) => v.name === item.variant)?.image ?? product.image}
+                        src={
+                          product.variants.find((v) => v.name === item.variant)?.image ??
+                          product.image
+                        }
                         alt={product.name}
                         className="w-full h-full object-cover"
                       />
@@ -71,7 +74,8 @@ function CartPage() {
                               className="inline-block w-3 h-3 rounded-full border border-border"
                               style={{
                                 backgroundColor:
-                                  product.variants.find((v) => v.name === item.variant)?.swatch ?? "transparent",
+                                  product.variants.find((v) => v.name === item.variant)?.swatch ??
+                                  "transparent",
                               }}
                             />
                             <span className="text-xs text-muted-foreground">

@@ -48,14 +48,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const add: CartContextValue["add"] = (id, size, qty = 1, variant) => {
     const color = variant ?? getProduct(id)?.color ?? "Unknown";
     setItems((cur) => {
-      const existing = cur.find(
-        (i) => i.id === id && i.size === size && i.variant === color,
-      );
+      const existing = cur.find((i) => i.id === id && i.size === size && i.variant === color);
       if (existing) {
         return cur.map((i) =>
-          i.id === id && i.size === size && i.variant === color
-            ? { ...i, qty: i.qty + qty }
-            : i,
+          i.id === id && i.size === size && i.variant === color ? { ...i, qty: i.qty + qty } : i,
         );
       }
       return [...cur, { id, size, qty, variant: color }];
@@ -65,22 +61,16 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const setQty: CartContextValue["setQty"] = (id, size, qty, variant) => {
     setItems((cur) =>
       qty <= 0
-        ? cur.filter(
-            (i) => !(i.id === id && i.size === size && i.variant === variant),
-          )
+        ? cur.filter((i) => !(i.id === id && i.size === size && i.variant === variant))
         : cur.map((i) =>
-            i.id === id && i.size === size && i.variant === variant
-              ? { ...i, qty }
-              : i,
+            i.id === id && i.size === size && i.variant === variant ? { ...i, qty } : i,
           ),
     );
   };
 
   const remove: CartContextValue["remove"] = (id, size, variant) =>
     setItems((cur) =>
-      cur.filter(
-        (i) => !(i.id === id && i.size === size && i.variant === variant),
-      ),
+      cur.filter((i) => !(i.id === id && i.size === size && i.variant === variant)),
     );
 
   const clear = () => setItems([]);

@@ -91,7 +91,8 @@ export function ProductCard({ product }: { product: Product }) {
         <button
           onClick={(e) => {
             e.preventDefault();
-            const variant = activeVariant !== null ? product.variants[activeVariant].name : product.color;
+            const variant =
+              activeVariant !== null ? product.variants[activeVariant].name : product.color;
             add(product.id, product.sizes[0], 1, variant);
           }}
           className="absolute bottom-0 left-0 w-full py-4 bg-foreground text-background text-[10px] font-bold uppercase tracking-widest translate-y-full group-hover:translate-y-0 transition-transform"
@@ -101,12 +102,8 @@ export function ProductCard({ product }: { product: Product }) {
       </Link>
       <div className="flex justify-between items-start gap-2">
         <div className="min-w-0">
-          <h3 className="text-sm font-bold uppercase tracking-tight truncate">
-            {product.name}
-          </h3>
-          <p className="text-xs text-muted-foreground mt-1 transition-colors">
-            {displayColor}
-          </p>
+          <h3 className="text-sm font-bold uppercase tracking-tight truncate">{product.name}</h3>
+          <p className="text-xs text-muted-foreground mt-1 transition-colors">{displayColor}</p>
         </div>
         <span className="text-sm font-bold whitespace-nowrap">${product.price}</span>
       </div>
@@ -134,9 +131,7 @@ export function ProductCard({ product }: { product: Product }) {
                 onMouseEnter={() => setActiveVariant(i)}
                 onFocus={() => setActiveVariant(i)}
                 className={`w-3.5 h-3.5 rounded-full border transition-transform hover:scale-125 ${
-                  activeVariant === i
-                    ? "border-foreground scale-125"
-                    : "border-border"
+                  activeVariant === i ? "border-foreground scale-125" : "border-border"
                 }`}
                 style={{ backgroundColor: v.swatch }}
               />

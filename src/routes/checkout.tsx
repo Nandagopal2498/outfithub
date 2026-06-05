@@ -27,8 +27,14 @@ const schema = z.object({
     .string()
     .trim()
     .regex(/^[0-9\s]{12,23}$/, "Enter a valid card number"),
-  expiry: z.string().trim().regex(/^(0[1-9]|1[0-2])\/\d{2}$/, "MM/YY"),
-  cvc: z.string().trim().regex(/^\d{3,4}$/, "3–4 digits"),
+  expiry: z
+    .string()
+    .trim()
+    .regex(/^(0[1-9]|1[0-2])\/\d{2}$/, "MM/YY"),
+  cvc: z
+    .string()
+    .trim()
+    .regex(/^\d{3,4}$/, "3–4 digits"),
 });
 
 type Errors = Partial<Record<keyof z.infer<typeof schema>, string>>;
@@ -106,7 +112,11 @@ function CheckoutPage() {
         <div className="w-12 h-1 bg-foreground mt-5" />
       </div>
 
-      <form onSubmit={handleSubmit} noValidate className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+      <form
+        onSubmit={handleSubmit}
+        noValidate
+        className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16"
+      >
         <div className="lg:col-span-7 space-y-10">
           <Section title="Contact">
             <Field name="email" label="Email" type="email" errors={errors} />
@@ -126,7 +136,12 @@ function CheckoutPage() {
           </Section>
 
           <Section title="Payment">
-            <Field name="card" label="Card number" errors={errors} placeholder="0000 0000 0000 0000" />
+            <Field
+              name="card"
+              label="Card number"
+              errors={errors}
+              placeholder="0000 0000 0000 0000"
+            />
             <div className="grid grid-cols-2 gap-4">
               <Field name="expiry" label="Expiry (MM/YY)" errors={errors} placeholder="08/28" />
               <Field name="cvc" label="CVC" errors={errors} placeholder="123" />
@@ -142,24 +157,36 @@ function CheckoutPage() {
                 const p = getProduct(item.id);
                 if (!p) return null;
                 return (
-                  <li key={`${item.id}-${item.size}-${item.variant}`} className="flex gap-4 items-center">
+                  <li
+                    key={`${item.id}-${item.size}-${item.variant}`}
+                    className="flex gap-4 items-center"
+                  >
                     <div className="relative size-16 bg-background overflow-hidden shrink-0">
-                      <img src={p.variants.find((v) => v.name === item.variant)?.image ?? p.image} alt={p.name} className="w-full h-full object-cover" />
+                      <img
+                        src={p.variants.find((v) => v.name === item.variant)?.image ?? p.image}
+                        alt={p.name}
+                        className="w-full h-full object-cover"
+                      />
                       <span className="absolute -top-1 -right-1 bg-foreground text-background text-[10px] size-5 rounded-full grid place-items-center font-bold">
                         {item.qty}
                       </span>
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-xs font-bold uppercase tracking-tight truncate">{p.name}</p>
+                      <p className="text-xs font-bold uppercase tracking-tight truncate">
+                        {p.name}
+                      </p>
                       <div className="flex items-center gap-1.5 mt-1">
                         <span
                           className="inline-block w-2.5 h-2.5 rounded-full border border-border"
                           style={{
                             backgroundColor:
-                              p.variants.find((v) => v.name === item.variant)?.swatch ?? "transparent",
+                              p.variants.find((v) => v.name === item.variant)?.swatch ??
+                              "transparent",
                           }}
                         />
-                        <span className="text-[11px] text-muted-foreground">{item.variant} · {item.size}</span>
+                        <span className="text-[11px] text-muted-foreground">
+                          {item.variant} · {item.size}
+                        </span>
                       </div>
                     </div>
                     <span className="text-xs font-bold">${(p.price * item.qty).toFixed(2)}</span>

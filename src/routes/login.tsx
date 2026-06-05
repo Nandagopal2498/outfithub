@@ -41,10 +41,13 @@ function LoginPage() {
           <div>
             <p className="label-eyebrow text-background/60 mb-4">Members Circle</p>
             <h2 className="text-5xl text-display leading-[0.9]">
-              Early access.<br />Better terms.
+              Early access.
+              <br />
+              Better terms.
             </h2>
             <p className="mt-6 text-sm text-background/60 max-w-sm">
-              Join the circle for first looks at every drop, member-only releases, and seamless returns.
+              Join the circle for first looks at every drop, member-only releases, and seamless
+              returns.
             </p>
           </div>
           <span className="text-[10px] uppercase tracking-widest text-background/40">
@@ -60,9 +63,7 @@ function LoginPage() {
             {mode === "signin" ? "Sign In" : "Create Account"}
           </h1>
           <p className="text-sm text-muted-foreground mb-10">
-            {mode === "signin"
-              ? "Welcome back to the circle."
-              : "Start your VANTAGE membership."}
+            {mode === "signin" ? "Welcome back to the circle." : "Start your VANTAGE membership."}
           </p>
 
           {done ? (
@@ -70,9 +71,7 @@ function LoginPage() {
               <p className="text-sm font-bold uppercase tracking-widest mb-3">
                 {mode === "signin" ? "Signed In" : "Welcome"}
               </p>
-              <p className="text-sm text-muted-foreground mb-6">
-                Authentication is a demo only.
-              </p>
+              <p className="text-sm text-muted-foreground mb-6">Authentication is a demo only.</p>
               <Link
                 to="/"
                 className="inline-block bg-foreground text-background px-8 py-3 text-[11px] font-bold uppercase tracking-widest"
@@ -82,15 +81,11 @@ function LoginPage() {
             </div>
           ) : (
             <form onSubmit={handleSubmit} noValidate className="space-y-5">
-              {mode === "signup" && (
-                <Input name="name" type="text" label="Full Name" />
-              )}
+              {mode === "signup" && <Input name="name" type="text" label="Full Name" />}
               <Input name="email" type="email" label="Email" />
               <Input name="password" type="password" label="Password" />
 
-              {error && (
-                <p className="text-[11px] font-semibold text-destructive">{error}</p>
-              )}
+              {error && <p className="text-[11px] font-semibold text-destructive">{error}</p>}
 
               <button
                 type="submit"

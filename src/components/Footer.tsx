@@ -8,7 +8,8 @@ export function Footer() {
               VANTAGE
             </span>
             <p className="text-background/60 text-sm leading-relaxed mb-8 max-w-xs">
-              Redefining the boundaries of contemporary fashion through precision engineering and timeless geometric forms.
+              Redefining the boundaries of contemporary fashion through precision engineering and
+              timeless geometric forms.
             </p>
             <div className="flex gap-3">
               {["IG", "TW", "YT"].map((s) => (
@@ -44,10 +45,7 @@ export function Footer() {
             <p className="text-xs text-background/60 mb-6">
               Join the circle for early access and collection previews.
             </p>
-            <form
-              onSubmit={(e) => e.preventDefault()}
-              className="flex gap-2"
-            >
+            <form onSubmit={(e) => e.preventDefault()} className="flex gap-2">
               <input
                 type="email"
                 placeholder="Email address"

@@ -36,11 +36,7 @@ export function Header() {
             ))}
           </div>
 
-          <button
-            className="md:hidden p-1"
-            aria-label="Menu"
-            onClick={() => setOpen(true)}
-          >
+          <button className="md:hidden p-1" aria-label="Menu" onClick={() => setOpen(true)}>
             <Menu className="size-5" />
           </button>
 
@@ -55,15 +51,15 @@ export function Header() {
               <Search className="size-4" />
               <span className="hidden lg:inline text-[13px] font-semibold uppercase">Search</span>
             </button>
-            <Link
-              to="/login"
-              className="hidden sm:flex items-center gap-1.5"
-              aria-label="Account"
-            >
+            <Link to="/login" className="hidden sm:flex items-center gap-1.5" aria-label="Account">
               <User className="size-4" />
               <span className="hidden lg:inline text-[13px] font-semibold uppercase">Account</span>
             </Link>
-            <Link to="/wishlist" className="flex items-center gap-1.5 relative" aria-label="Wishlist">
+            <Link
+              to="/wishlist"
+              className="flex items-center gap-1.5 relative"
+              aria-label="Wishlist"
+            >
               <Heart className={`size-4 ${wishCount > 0 ? "fill-foreground" : ""}`} />
               {wishCount > 0 && (
                 <span className="absolute -top-1.5 -right-2 bg-foreground text-background text-[9px] min-w-4 h-4 px-1 rounded-full flex items-center justify-center font-bold">

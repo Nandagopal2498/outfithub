@@ -75,7 +75,9 @@ function Index() {
         <div className="relative z-10 max-w-2xl text-white animate-fade-up">
           <p className="label-eyebrow text-white/70 mb-5">AW / 2026 Core Collection</p>
           <h1 className="text-5xl sm:text-7xl text-display leading-[0.9] mb-6">
-            Engineered<br />Simplicity
+            Engineered
+            <br />
+            Simplicity
           </h1>
           <p className="text-base md:text-lg font-medium max-w-md mb-8 opacity-90">
             Technical fabrics reimagined for urban utility. Built once, worn for a decade.
@@ -159,10 +161,26 @@ function Index() {
       <section className="bg-surface py-20">
         <div className="max-w-[1440px] mx-auto px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-10">
           {[
-            { Icon: Truck, title: "Global Shipping", text: "Rapid distribution across five continents." },
-            { Icon: Recycle, title: "Sustainable Make", text: "80% recycled or organic source materials." },
-            { Icon: Headphones, title: "Premium Support", text: "24/7 dedicated concierge for members." },
-            { Icon: ShieldCheck, title: "Secure Payments", text: "Fully encrypted with fraud protection." },
+            {
+              Icon: Truck,
+              title: "Global Shipping",
+              text: "Rapid distribution across five continents.",
+            },
+            {
+              Icon: Recycle,
+              title: "Sustainable Make",
+              text: "80% recycled or organic source materials.",
+            },
+            {
+              Icon: Headphones,
+              title: "Premium Support",
+              text: "24/7 dedicated concierge for members.",
+            },
+            {
+              Icon: ShieldCheck,
+              title: "Secure Payments",
+              text: "Fully encrypted with fraud protection.",
+            },
           ].map(({ Icon, title, text }) => (
             <div key={title} className="text-center">
               <div className="size-12 bg-foreground/5 rounded-full mx-auto mb-5 grid place-items-center">

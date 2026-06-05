@@ -15,7 +15,10 @@ export const Route = createFileRoute("/shop")({
   head: () => ({
     meta: [
       { title: "Shop — VANTAGE" },
-      { name: "description", content: "Browse the full VANTAGE collection of tees, hoodies, shoes and watches." },
+      {
+        name: "description",
+        content: "Browse the full VANTAGE collection of tees, hoodies, shoes and watches.",
+      },
     ],
   }),
 });
@@ -32,6 +35,15 @@ function ShopPage() {
         return false;
       return true;
     });
+
+    // Ensure only unique products (by ID) are shown
+    const seen = new Set<string>();
+    list = list.filter((p) => {
+      if (seen.has(p.id)) return false;
+      seen.add(p.id);
+      return true;
+    });
+
     if (sort === "low") list = [...list].sort((a, b) => a.price - b.price);
     if (sort === "high") list = [...list].sort((a, b) => b.price - a.price);
     return list;

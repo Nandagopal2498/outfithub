@@ -26,17 +26,19 @@ import teeOversizedOlive from "@/assets/products/tee-oversized-olive.jpg";
 
 // New hoodies
 import hoodieZipBlack from "@/assets/products/hoodie-zip-black.jpg";
-import hoodieCroppedBone from "@/assets/products/hoodie-cropped-bone.jpg";
+import hoodieCroppedBone from "@/assets/products/hoodie-cropped-bone.png";
 import hoodieOversizedCharcoal from "@/assets/products/hoodie-oversized-charcoal.jpg";
 import hoodieTechOlive from "@/assets/products/hoodie-tech-olive.jpg";
-import hoodieQuarterzipNavy from "@/assets/products/hoodie-quarterzip-navy.jpg";
-import hoodieHeavyCream from "@/assets/products/hoodie-heavy-cream.jpg";
+import hoodieQuarterzipNavy from "@/assets/products/hoodie-quarterzip-navy-front.png";
+import hoodieHeavyCream from "@/assets/products/hoodie-heavy-cream-front.png";
 import hoodieLightSand from "@/assets/products/hoodie-light-sand.jpg";
-import hoodieTerryRust from "@/assets/products/hoodie-terry-rust.jpg";
-import hoodieZipGrey from "@/assets/products/hoodie-zip-grey.jpg";
+import hoodieTerryRust from "@/assets/products/hoodie-terry-rust-front.png";
+import hoodieZipGrey from "@/assets/products/hoodie-zip-grey-front.png";
 import hoodiePulloverForest from "@/assets/products/hoodie-pullover-forest.jpg";
 import hoodieSherpaTan from "@/assets/products/hoodie-sherpa-tan.jpg";
 import hoodieMinimalWhite from "@/assets/products/hoodie-minimal-white.jpg";
+import hoodieLosAngeles from "@/assets/products/hoodie-los-angeles.png";
+import hoodieJmcErl from "@/assets/products/hoodie-jmc-erl.png";
 
 // New shoes
 import shoeCourtWhite from "@/assets/products/shoe-court-white.jpg";
@@ -94,7 +96,7 @@ const hoodieSizes = ["S", "M", "L", "XL"];
 const shoeSizes = ["8", "9", "10", "11", "12"];
 const watchSizes = ["One Size"];
 
-export const products: Product[] = [
+const rawProducts: Product[] = [
   // ───────── TEES (12) ─────────
   {
     id: "core-tee-white",
@@ -206,8 +208,7 @@ export const products: Product[] = [
     altImage: teeRingerCream,
     rating: 4,
     reviews: 38,
-    description:
-      "Retro contrast ribbing at the collar and cuffs on a soft combed cotton body.",
+    description: "Retro contrast ribbing at the collar and cuffs on a soft combed cotton body.",
     sizes: tshirtSizes,
     variants: [{ name: "Cream", swatch: "#f5ebd6", image: teeRingerCream }],
   },
@@ -221,8 +222,7 @@ export const products: Product[] = [
     altImage: teeVneckWhite,
     rating: 4,
     reviews: 29,
-    description:
-      "Mid-weight pima cotton v-neck. Refined, breathable, made for warmer days.",
+    description: "Mid-weight pima cotton v-neck. Refined, breathable, made for warmer days.",
     sizes: tshirtSizes,
     variants: [{ name: "Optic White", swatch: "#f5f3ee", image: teeVneckWhite }],
   },
@@ -251,8 +251,7 @@ export const products: Product[] = [
     altImage: teeStripeNavy,
     rating: 5,
     reviews: 44,
-    description:
-      "Heritage breton stripe in dense cotton jersey. Effortless, year-round.",
+    description: "Heritage breton stripe in dense cotton jersey. Effortless, year-round.",
     sizes: tshirtSizes,
     variants: [{ name: "Deep Navy", swatch: "#1b2a4a", image: teeStripeNavy }],
   },
@@ -282,16 +281,15 @@ export const products: Product[] = [
     rating: 5,
     reviews: 64,
     badge: "New",
-    description:
-      "Drop-shoulder oversized fit in heavy garment-washed cotton.",
+    description: "Drop-shoulder oversized fit in heavy garment-washed cotton.",
     sizes: tshirtSizes,
     variants: [{ name: "Olive", swatch: "#828c5a", image: teeOversizedOlive }],
   },
 
-  // ───────── HOODIES (14) ─────────
+  // ───────── HOODIES (16) ─────────
   {
     id: "fleece-hoodie-black",
-    name: "Core Fleece Hoodie",
+    name: "Core Fleece Zip Hoodie",
     color: "Onyx Black",
     price: 145,
     category: "hoodies",
@@ -301,18 +299,17 @@ export const products: Product[] = [
     rating: 5,
     reviews: 212,
     badge: "Best Seller",
-    description:
-      "Heavyweight 450gsm brushed-back fleece with double-lined hood and ribbed cuffs.",
+    description: "A premium heavy fleece zip-up hoodie featuring a grey-and-white striped hood lining, double-lined hood, and deep side pockets.",
     sizes: hoodieSizes,
     variants: [
       { name: "Onyx Black", swatch: "#0d0d0d", image: hoodie1 },
-      { name: "Stone Grey", swatch: "#8a8780", image: hoodie2 },
+      { name: "Cobalt Blue", swatch: "#106ebe", image: hoodie2 },
     ],
   },
   {
     id: "fleece-hoodie-stone",
-    name: "Garment-Dyed Hoodie",
-    color: "Stone Grey",
+    name: "Garment-Dyed Zip Hoodie",
+    color: "Cobalt Blue",
     price: 165,
     category: "hoodies",
     image: hoodie2,
@@ -321,10 +318,10 @@ export const products: Product[] = [
     rating: 4,
     reviews: 47,
     description:
-      "Garment-dyed for a softer, lived-in feel. Mid-weight loopback cotton with structured shoulder line.",
+      "A vibrant cobalt blue zip-up hoodie in a structured loopback cotton fit, complete with a clean front zipper.",
     sizes: hoodieSizes,
     variants: [
-      { name: "Stone Grey", swatch: "#8a8780", image: hoodie2 },
+      { name: "Cobalt Blue", swatch: "#106ebe", image: hoodie2 },
       { name: "Onyx Black", swatch: "#0d0d0d", image: hoodie1 },
     ],
   },
@@ -354,8 +351,7 @@ export const products: Product[] = [
     altImage: hoodieCroppedBone,
     rating: 4,
     reviews: 33,
-    description:
-      "Shortened hem and boxy fit. Soft loopback cotton in warm bone.",
+    description: "Shortened hem and boxy fit. Soft loopback cotton in warm bone.",
     sizes: hoodieSizes,
     variants: [{ name: "Bone", swatch: "#f1eadb", image: hoodieCroppedBone }],
   },
@@ -369,15 +365,14 @@ export const products: Product[] = [
     altImage: hoodieOversizedCharcoal,
     rating: 5,
     reviews: 78,
-    description:
-      "Drop-shoulder oversized fit, 500gsm brushed fleece. Built like outerwear.",
+    description: "Drop-shoulder oversized fit, 500gsm brushed fleece. Built like outerwear.",
     sizes: hoodieSizes,
     variants: [{ name: "Charcoal", swatch: "#36363a", image: hoodieOversizedCharcoal }],
   },
   {
     id: "tech-hoodie-olive",
-    name: "Tech Pullover",
-    color: "Olive",
+    name: "Nothing Graphic Hoodie",
+    color: "Navy",
     price: 190,
     category: "hoodies",
     image: hoodieTechOlive,
@@ -386,9 +381,9 @@ export const products: Product[] = [
     reviews: 52,
     badge: "Limited",
     description:
-      "Water-resistant technical shell with a fleece-lined hood. For unpredictable city weather.",
+      "A premium heavyweight navy pullover hoodie featuring a bold 'NOTHING' graphic intersected by a clean vertical white line.",
     sizes: hoodieSizes,
-    variants: [{ name: "Olive", swatch: "#4a5040", image: hoodieTechOlive }],
+    variants: [{ name: "Navy", swatch: "#141f36", image: hoodieTechOlive }],
   },
   {
     id: "quarter-zip-navy",
@@ -415,8 +410,7 @@ export const products: Product[] = [
     altImage: hoodieHeavyCream,
     rating: 5,
     reviews: 42,
-    description:
-      "500gsm brushed fleece pullover with a dense rib hem. Built to last decades.",
+    description: "500gsm brushed fleece pullover with a dense rib hem. Built to last decades.",
     sizes: hoodieSizes,
     variants: [{ name: "Cream", swatch: "#f5ebd6", image: hoodieHeavyCream }],
   },
@@ -430,8 +424,7 @@ export const products: Product[] = [
     altImage: hoodieLightSand,
     rating: 4,
     reviews: 28,
-    description:
-      "Featherweight jersey pullover. Perfect transitional layer for warmer months.",
+    description: "Featherweight jersey pullover. Perfect transitional layer for warmer months.",
     sizes: hoodieSizes,
     variants: [{ name: "Sand", swatch: "#e8d8b8", image: hoodieLightSand }],
   },
@@ -461,8 +454,7 @@ export const products: Product[] = [
     altImage: hoodieZipGrey,
     rating: 4,
     reviews: 56,
-    description:
-      "Heather-blended zip hoodie with twin-needle stitching. A classic refined.",
+    description: "Heather-blended zip hoodie with twin-needle stitching. A classic refined.",
     sizes: hoodieSizes,
     variants: [{ name: "Heather Grey", swatch: "#a3a3a8", image: hoodieZipGrey }],
   },
@@ -476,8 +468,7 @@ export const products: Product[] = [
     altImage: hoodiePulloverForest,
     rating: 5,
     reviews: 44,
-    description:
-      "Mid-weight pullover with a tonal embroidered chest mark in forest green.",
+    description: "Mid-weight pullover with a tonal embroidered chest mark in forest green.",
     sizes: hoodieSizes,
     variants: [{ name: "Forest Green", swatch: "#1f3d2b", image: hoodiePulloverForest }],
   },
@@ -492,8 +483,7 @@ export const products: Product[] = [
     rating: 5,
     reviews: 38,
     badge: "Limited",
-    description:
-      "Cozy sherpa-lined hood and shoulders. Heavy cotton shell, built for winter.",
+    description: "Cozy sherpa-lined hood and shoulders. Heavy cotton shell, built for winter.",
     sizes: hoodieSizes,
     variants: [{ name: "Tan", swatch: "#b97a3e", image: hoodieSherpaTan }],
   },
@@ -507,10 +497,39 @@ export const products: Product[] = [
     altImage: hoodieMinimalWhite,
     rating: 4,
     reviews: 49,
-    description:
-      "Unbranded pullover in mid-weight loopback cotton. Quiet, considered, daily.",
+    description: "Unbranded pullover in mid-weight loopback cotton. Quiet, considered, daily.",
     sizes: hoodieSizes,
     variants: [{ name: "Optic White", swatch: "#f5f3ee", image: hoodieMinimalWhite }],
+  },
+  {
+    id: "vintage-wash-hoodie-green",
+    name: "Los Angeles Hoodie",
+    color: "Beige",
+    price: 160,
+    category: "hoodies",
+    image: hoodieLosAngeles,
+    altImage: hoodieLosAngeles,
+    rating: 5,
+    reviews: 14,
+    badge: "New",
+    description: "A relaxed-fit heavy cotton hoodie featuring a classic arched Los Angeles graphic.",
+    sizes: hoodieSizes,
+    variants: [{ name: "Beige", swatch: "#eae4d9", image: hoodieLosAngeles }],
+  },
+  {
+    id: "zip-hoodie-navy",
+    name: "JMC ERL Hoodie",
+    color: "Onyx Black",
+    price: 180,
+    category: "hoodies",
+    image: hoodieJmcErl,
+    altImage: hoodieJmcErl,
+    rating: 4,
+    reviews: 23,
+    description:
+      "A structured black fleece hoodie featuring a left chest utility pocket and screen-printed graphic details.",
+    sizes: hoodieSizes,
+    variants: [{ name: "Onyx Black", swatch: "#0d0d0d", image: hoodieJmcErl }],
   },
 
   // ───────── SHOES (14) ─────────
@@ -563,8 +582,7 @@ export const products: Product[] = [
     altImage: shoeCourtWhite,
     rating: 4,
     reviews: 87,
-    description:
-      "Minimal court silhouette in soft tumbled leather. A clean modern classic.",
+    description: "Minimal court silhouette in soft tumbled leather. A clean modern classic.",
     sizes: shoeSizes,
     variants: [{ name: "Optic White", swatch: "#f5f3ee", image: shoeCourtWhite }],
   },
@@ -579,8 +597,7 @@ export const products: Product[] = [
     rating: 5,
     reviews: 64,
     badge: "New",
-    description:
-      "Lugged outsole and abrasion-resistant ripstop upper. From trail to terminal.",
+    description: "Lugged outsole and abrasion-resistant ripstop upper. From trail to terminal.",
     sizes: shoeSizes,
     variants: [{ name: "Sand", swatch: "#c9b99a", image: shoeTrailSand }],
   },
@@ -594,8 +611,7 @@ export const products: Product[] = [
     altImage: shoeChelseaBlack,
     rating: 5,
     reviews: 41,
-    description:
-      "Italian leather chelsea boot on a stacked leather sole. A wardrobe cornerstone.",
+    description: "Italian leather chelsea boot on a stacked leather sole. A wardrobe cornerstone.",
     sizes: shoeSizes,
     variants: [{ name: "Onyx Black", swatch: "#0d0d0d", image: shoeChelseaBlack }],
   },
@@ -624,8 +640,7 @@ export const products: Product[] = [
     altImage: shoeSliponGrey,
     rating: 4,
     reviews: 55,
-    description:
-      "Heavy canvas upper, vulcanized rubber sole. The summer essential.",
+    description: "Heavy canvas upper, vulcanized rubber sole. The summer essential.",
     sizes: shoeSizes,
     variants: [{ name: "Stone Grey", swatch: "#8a8780", image: shoeSliponGrey }],
   },
@@ -640,8 +655,7 @@ export const products: Product[] = [
     rating: 5,
     reviews: 36,
     badge: "Limited",
-    description:
-      "Waxed nubuck upper with a lugged sole. Tested in alpine conditions.",
+    description: "Waxed nubuck upper with a lugged sole. Tested in alpine conditions.",
     sizes: shoeSizes,
     variants: [{ name: "Walnut", swatch: "#6b4a32", image: shoeHikingBrown }],
   },
@@ -655,8 +669,7 @@ export const products: Product[] = [
     altImage: shoeLoaferOlive,
     rating: 4,
     reviews: 22,
-    description:
-      "Italian suede penny loafer with hand-stitched apron. Easy elegance.",
+    description: "Italian suede penny loafer with hand-stitched apron. Easy elegance.",
     sizes: shoeSizes,
     variants: [{ name: "Olive Suede", swatch: "#4a5040", image: shoeLoaferOlive }],
   },
@@ -670,8 +683,7 @@ export const products: Product[] = [
     altImage: shoeHightopCream,
     rating: 4,
     reviews: 47,
-    description:
-      "Mid-cut leather high-top with padded collar and gum sole.",
+    description: "Mid-cut leather high-top with padded collar and gum sole.",
     sizes: shoeSizes,
     variants: [{ name: "Cream", swatch: "#f0ebe0", image: shoeHightopCream }],
   },
@@ -686,8 +698,7 @@ export const products: Product[] = [
     rating: 5,
     reviews: 31,
     badge: "New",
-    description:
-      "Carbon-plated race flat with responsive foam midsole. Race day ready.",
+    description: "Carbon-plated race flat with responsive foam midsole. Race day ready.",
     sizes: shoeSizes,
     variants: [{ name: "Signal Red", swatch: "#c0392b", image: shoeRaceRed }],
   },
@@ -701,8 +712,7 @@ export const products: Product[] = [
     altImage: shoeRunningGrey,
     rating: 4,
     reviews: 58,
-    description:
-      "Engineered knit upper and chunky cushioned midsole. Daily-mile comfort.",
+    description: "Engineered knit upper and chunky cushioned midsole. Daily-mile comfort.",
     sizes: shoeSizes,
     variants: [{ name: "Heather Grey", swatch: "#a3a3a8", image: shoeRunningGrey }],
   },
@@ -716,8 +726,7 @@ export const products: Product[] = [
     altImage: shoeBoatNavy,
     rating: 4,
     reviews: 33,
-    description:
-      "Hand-sewn moccasin construction with 360 lacing and a siped white sole.",
+    description: "Hand-sewn moccasin construction with 360 lacing and a siped white sole.",
     sizes: shoeSizes,
     variants: [{ name: "Deep Navy", swatch: "#1b2a4a", image: shoeBoatNavy }],
   },
@@ -731,8 +740,7 @@ export const products: Product[] = [
     altImage: shoeSandalTan,
     rating: 4,
     reviews: 24,
-    description:
-      "Veg-tan leather straps on a cork-latex footbed. Summer-ready.",
+    description: "Veg-tan leather straps on a cork-latex footbed. Summer-ready.",
     sizes: shoeSizes,
     variants: [{ name: "Tan", swatch: "#b97a3e", image: shoeSandalTan }],
   },
@@ -750,8 +758,7 @@ export const products: Product[] = [
     rating: 5,
     reviews: 28,
     badge: "Limited",
-    description:
-      "42mm PVD-coated case with sapphire crystal and a Swiss chronograph movement.",
+    description: "42mm PVD-coated case with sapphire crystal and a Swiss chronograph movement.",
     sizes: watchSizes,
     variants: [
       { name: "Stealth Matte", swatch: "#1a1a1a", image: watch1 },
@@ -788,8 +795,7 @@ export const products: Product[] = [
     rating: 5,
     reviews: 67,
     badge: "New",
-    description:
-      "200m water-resistant diver with unidirectional bezel and lumed indices.",
+    description: "200m water-resistant diver with unidirectional bezel and lumed indices.",
     sizes: watchSizes,
     variants: [{ name: "Abyss Blue", swatch: "#0c2340", image: watchDiverBlue }],
   },
@@ -803,8 +809,7 @@ export const products: Product[] = [
     altImage: watchPilotBlack,
     rating: 5,
     reviews: 39,
-    description:
-      "Aviation-inspired chronograph with oversized crown and matte black dial.",
+    description: "Aviation-inspired chronograph with oversized crown and matte black dial.",
     sizes: watchSizes,
     variants: [{ name: "Onyx Black", swatch: "#0d0d0d", image: watchPilotBlack }],
   },
@@ -819,8 +824,7 @@ export const products: Product[] = [
     rating: 5,
     reviews: 22,
     badge: "Limited",
-    description:
-      "Ultra-thin case with sunburst champagne dial and dauphine hands.",
+    description: "Ultra-thin case with sunburst champagne dial and dauphine hands.",
     sizes: watchSizes,
     variants: [{ name: "Champagne Gold", swatch: "#c9a84c", image: watchDressGold }],
   },
@@ -834,8 +838,7 @@ export const products: Product[] = [
     altImage: watchGmtGreen,
     rating: 5,
     reviews: 48,
-    description:
-      "Dual time zone GMT with 24-hour bezel. Made for cross-meridian living.",
+    description: "Dual time zone GMT with 24-hour bezel. Made for cross-meridian living.",
     sizes: watchSizes,
     variants: [{ name: "Forest Green", swatch: "#1f3d2b", image: watchGmtGreen }],
   },
@@ -849,8 +852,7 @@ export const products: Product[] = [
     altImage: watchDigitalGrey,
     rating: 4,
     reviews: 84,
-    description:
-      "Modern digital quartz with sapphire-coated glass and a resin-bonded case.",
+    description: "Modern digital quartz with sapphire-coated glass and a resin-bonded case.",
     sizes: watchSizes,
     variants: [{ name: "Graphite", swatch: "#3a3a3d", image: watchDigitalGrey }],
   },
@@ -864,8 +866,7 @@ export const products: Product[] = [
     altImage: watchMoonCream,
     rating: 5,
     reviews: 19,
-    description:
-      "Hand-finished moonphase complication on a warm cream dial. Heirloom-grade.",
+    description: "Hand-finished moonphase complication on a warm cream dial. Heirloom-grade.",
     sizes: watchSizes,
     variants: [{ name: "Cream", swatch: "#f0ebe0", image: watchMoonCream }],
   },
@@ -880,8 +881,7 @@ export const products: Product[] = [
     rating: 4,
     reviews: 53,
     badge: "New",
-    description:
-      "Lightweight titanium-on-rubber sport with luminous markers. Built for motion.",
+    description: "Lightweight titanium-on-rubber sport with luminous markers. Built for motion.",
     sizes: watchSizes,
     variants: [{ name: "Signal Orange", swatch: "#e85d3a", image: watchSportOrange }],
   },
@@ -911,8 +911,7 @@ export const products: Product[] = [
     altImage: watchRacingWhite,
     rating: 5,
     reviews: 34,
-    description:
-      "Motorsport-inspired panda dial with tachymeter scale and pump pushers.",
+    description: "Motorsport-inspired panda dial with tachymeter scale and pump pushers.",
     sizes: watchSizes,
     variants: [{ name: "Panda White", swatch: "#f5f3ee", image: watchRacingWhite }],
   },
@@ -926,12 +925,24 @@ export const products: Product[] = [
     altImage: watchMinimalTan,
     rating: 4,
     reviews: 37,
-    description:
-      "Pared-back white dial with baton hands on a tan leather strap. Quiet design.",
+    description: "Pared-back white dial with baton hands on a tan leather strap. Quiet design.",
     sizes: watchSizes,
     variants: [{ name: "Tan Strap", swatch: "#b97a3e", image: watchMinimalTan }],
   },
 ];
+
+// Ensure all products have unique IDs. If duplicate IDs are detected, they are filtered out and a warning/error is logged.
+const seenIds = new Set<string>();
+export const products: Product[] = rawProducts.filter((p) => {
+  if (seenIds.has(p.id)) {
+    console.warn(
+      `Duplicate product ID detected and ignored: "${p.id}". Ensure all product IDs are unique.`,
+    );
+    return false;
+  }
+  seenIds.add(p.id);
+  return true;
+});
 
 export const categories: { id: Category; label: string }[] = [
   { id: "tees", label: "Tees" },
