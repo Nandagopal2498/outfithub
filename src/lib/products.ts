@@ -33,7 +33,7 @@ import hoodieQuarterzipNavy from "@/assets/products/hoodie-quarterzip-navy-front
 import hoodieHeavyCream from "@/assets/products/hoodie-heavy-cream-front.png";
 import hoodieLightSand from "@/assets/products/hoodie-light-sand.jpg";
 import hoodieTerryRust from "@/assets/products/hoodie-terry-rust-front.png";
-import hoodieZipGrey from "@/assets/products/hoodie-zip-grey-front.png";
+import hoodieSageGreen from "@/assets/products/hoodie-sage-green.png";
 import hoodiePulloverForest from "@/assets/products/hoodie-pullover-forest.jpg";
 import hoodieSherpaTan from "@/assets/products/hoodie-sherpa-tan.jpg";
 import hoodieMinimalWhite from "@/assets/products/hoodie-minimal-white.jpg";
@@ -445,18 +445,18 @@ const rawProducts: Product[] = [
     variants: [{ name: "Rust", swatch: "#c45a2a", image: hoodieTerryRust }],
   },
   {
-    id: "zip-hoodie-grey",
-    name: "Heather Zip Hoodie",
-    color: "Heather Grey",
+    id: "sage-green-hoodie",
+    name: "Sage Green Hoodie",
+    color: "Sage Green",
     price: 160,
     category: "hoodies",
-    image: hoodieZipGrey,
-    altImage: hoodieZipGrey,
-    rating: 4,
+    image: hoodieSageGreen,
+    altImage: hoodieSageGreen,
+    rating: 5,
     reviews: 56,
-    description: "Heather-blended zip hoodie with twin-needle stitching. A classic refined.",
+    description: "A premium cotton pullover hoodie in a relaxed sage green colorway, offering understated style and ultimate comfort.",
     sizes: hoodieSizes,
-    variants: [{ name: "Heather Grey", swatch: "#a3a3a8", image: hoodieZipGrey }],
+    variants: [{ name: "Sage Green", swatch: "#829c7d", image: hoodieSageGreen }],
   },
   {
     id: "pullover-hoodie-forest",
