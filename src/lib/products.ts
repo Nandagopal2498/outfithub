@@ -105,7 +105,7 @@ const rawProducts: Product[] = [
     price: 65,
     category: "tees",
     image: tee1,
-    altImage: tee2,
+    altImage: tee1,
     video: teeVideo.url,
     rating: 5,
     reviews: 124,
@@ -113,30 +113,25 @@ const rawProducts: Product[] = [
     description:
       "A 260gsm garment-dyed cotton tee with a relaxed boxy silhouette and reinforced ribbed collar. Cut and sewn in Portugal.",
     sizes: tshirtSizes,
-    variants: [
-      { name: "Optic White", swatch: "#f5f3ee", image: tee1 },
-      { name: "Onyx Black", swatch: "#0d0d0d", image: tee2 },
-    ],
+    variants: [{ name: "Optic White", swatch: "#f5f3ee", image: tee1 }],
   },
   {
-    id: "core-tee-black",
-    name: "Core Heavyweight Tee",
+    id: "midnight-tee-black",
+    name: "Midnight Jersey Tee",
     color: "Onyx Black",
     price: 65,
     category: "tees",
     image: tee2,
-    altImage: tee1,
+    altImage: tee2,
     video: teeVideo.url,
     rating: 5,
     reviews: 88,
     description:
-      "A 260gsm garment-dyed cotton tee with a relaxed boxy silhouette. The wardrobe foundation in true monochrome black.",
+      "Pigment-dyed 240gsm jersey with a softly tapered hem and a slightly elongated body. The wardrobe foundation in true monochrome black.",
     sizes: tshirtSizes,
-    variants: [
-      { name: "Onyx Black", swatch: "#0d0d0d", image: tee2 },
-      { name: "Optic White", swatch: "#f5f3ee", image: tee1 },
-    ],
+    variants: [{ name: "Onyx Black", swatch: "#0d0d0d", image: tee2 }],
   },
+
   {
     id: "pocket-tee-sand",
     name: "Pocket Tee",
