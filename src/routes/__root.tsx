@@ -77,8 +77,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "description", content: "StyleHaven Storefront is a modern e-commerce website for clothing, inspired by top fashion retailers." },
       { property: "og:description", content: "StyleHaven Storefront is a modern e-commerce website for clothing, inspired by top fashion retailers." },
       { name: "twitter:description", content: "StyleHaven Storefront is a modern e-commerce website for clothing, inspired by top fashion retailers." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/5e08c914-53d6-4d8d-8571-36d513151a61/id-preview-a6b76bb0--8d44f5d9-f5c0-468b-960e-e9e6b33e580d.lovable.app-1780630182492.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/5e08c914-53d6-4d8d-8571-36d513151a61/id-preview-a6b76bb0--8d44f5d9-f5c0-468b-960e-e9e6b33e580d.lovable.app-1780630182492.png" },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/cbabdb8c-8381-47a3-93b8-4f55e8dbbc87/id-preview-ac125015--8d44f5d9-f5c0-468b-960e-e9e6b33e580d.lovable.app-1780632348042.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/cbabdb8c-8381-47a3-93b8-4f55e8dbbc87/id-preview-ac125015--8d44f5d9-f5c0-468b-960e-e9e6b33e580d.lovable.app-1780632348042.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
