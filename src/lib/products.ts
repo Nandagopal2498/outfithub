@@ -530,7 +530,7 @@ const rawProducts: Product[] = [
     price: 185,
     category: "shoes",
     image: shoe1,
-    altImage: shoe2,
+    altImage: shoe1,
     video: shoeVideo.url,
     rating: 5,
     reviews: 312,
@@ -538,30 +538,25 @@ const rawProducts: Product[] = [
     description:
       "Full-grain leather upper on a sculpted EVA midsole. Built for movement, refined for the city.",
     sizes: shoeSizes,
-    variants: [
-      { name: "Arctic White", swatch: "#f5f3ee", image: shoe1 },
-      { name: "Stealth Black", swatch: "#0d0d0d", image: shoe2 },
-    ],
+    variants: [{ name: "Arctic White", swatch: "#f5f3ee", image: shoe1 }],
   },
   {
-    id: "nexus-trainer-black",
-    name: "Nexus Runner",
+    id: "stealth-runner-black",
+    name: "Stealth Runner 02",
     color: "Stealth Black",
     price: 210,
     category: "shoes",
     image: shoe2,
-    altImage: shoe1,
+    altImage: shoe2,
     video: shoeVideo.url,
     rating: 5,
     reviews: 96,
     description:
-      "All-black mesh-and-leather runner with cushioned air sole unit. Quiet performance, monochrome attitude.",
+      "All-black mesh-and-leather runner with a cushioned air sole unit and reflective heel pull. Quiet performance, monochrome attitude.",
     sizes: shoeSizes,
-    variants: [
-      { name: "Stealth Black", swatch: "#0d0d0d", image: shoe2 },
-      { name: "Arctic White", swatch: "#f5f3ee", image: shoe1 },
-    ],
+    variants: [{ name: "Stealth Black", swatch: "#0d0d0d", image: shoe2 }],
   },
+
   {
     id: "court-low-white",
     name: "Court Low",
