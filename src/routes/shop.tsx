@@ -12,15 +12,6 @@ const searchSchema = z.object({
 export const Route = createFileRoute("/shop")({
   validateSearch: searchSchema,
   component: ShopPage,
-  head: () => ({
-    meta: [
-      { title: "Shop — VANTAGE" },
-      {
-        name: "description",
-        content: "Browse the full VANTAGE collection of tees, hoodies, shoes and watches.",
-      },
-    ],
-  }),
 });
 
 function ShopPage() {
@@ -59,6 +50,11 @@ function ShopPage() {
 
   return (
     <div className="max-w-[1440px] mx-auto px-6 lg:px-8 py-12 md:py-20">
+      <title>Shop — VANTAGE</title>
+      <meta
+        name="description"
+        content="Browse the full VANTAGE collection of tees, hoodies, shoes and watches."
+      />
       <div className="mb-12 md:mb-16">
         <p className="label-eyebrow text-muted-foreground mb-3">Collection</p>
         <h1 className="text-4xl md:text-6xl text-display">

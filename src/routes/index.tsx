@@ -12,17 +12,6 @@ import { Truck, Recycle, Headphones, ShieldCheck } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   component: Index,
-  head: () => ({
-    meta: [
-      { title: "VANTAGE — Engineered Simplicity" },
-      {
-        name: "description",
-        content:
-          "Autumn / Winter Core Collection. Premium minimalist clothing, footwear and watches by VANTAGE Collective.",
-      },
-      { property: "og:image", content: heroImg },
-    ],
-  }),
 });
 
 const categoryTiles = [
@@ -49,6 +38,12 @@ function Index() {
 
   return (
     <div>
+      <title>VANTAGE — Engineered Simplicity</title>
+      <meta
+        name="description"
+        content="Autumn / Winter Core Collection. Premium minimalist clothing, footwear and watches by VANTAGE Collective."
+      />
+      <meta property="og:image" content={heroImg} />
       {/* Hero */}
       <section
         className="relative h-[85vh] w-full overflow-hidden flex items-end px-6 md:px-12 pb-16 md:pb-24 group"

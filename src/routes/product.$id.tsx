@@ -19,17 +19,6 @@ export const Route = createFileRoute("/product/$id")({
     if (!product) throw notFound();
     return { product };
   },
-  head: ({ loaderData }) => ({
-    meta: loaderData
-      ? [
-          { title: `${loaderData.product.name} — VANTAGE` },
-          { name: "description", content: loaderData.product.description },
-          { property: "og:title", content: `${loaderData.product.name} — VANTAGE` },
-          { property: "og:description", content: loaderData.product.description },
-          { property: "og:image", content: loaderData.product.image },
-        ]
-      : [],
-  }),
   notFoundComponent: () => (
     <div className="py-32 text-center">
       <h1 className="text-display text-4xl">Product not found</h1>
@@ -43,6 +32,7 @@ export const Route = createFileRoute("/product/$id")({
   ),
   component: ProductPage,
 });
+
 
 function ProductPage() {
   const { product } = Route.useLoaderData();
@@ -166,6 +156,11 @@ function ProductPage() {
 
   return (
     <div>
+      <title>{`${product.name} — VANTAGE`}</title>
+      <meta name="description" content={product.description} />
+      <meta property="og:title" content={`${product.name} — VANTAGE`} />
+      <meta property="og:description" content={product.description} />
+      <meta property="og:image" content={product.image} />
       <div className="max-w-[1440px] mx-auto px-6 lg:px-8 pt-8">
         <nav className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground flex gap-2">
           <Link to="/" className="hover:text-foreground">
