@@ -738,17 +738,14 @@ const rawProducts: Product[] = [
     price: 340,
     category: "watches",
     image: watch1,
-    altImage: watch2,
+    altImage: watch1,
     video: watchVideo.url,
     rating: 5,
     reviews: 28,
     badge: "Limited",
     description: "42mm PVD-coated case with sapphire crystal and a Swiss chronograph movement.",
     sizes: watchSizes,
-    variants: [
-      { name: "Stealth Matte", swatch: "#1a1a1a", image: watch1 },
-      { name: "Brushed Steel", swatch: "#b8b8bd", image: watch2 },
-    ],
+    variants: [{ name: "Stealth Matte", swatch: "#1a1a1a", image: watch1 }],
   },
   {
     id: "field-watch-02",
@@ -757,18 +754,16 @@ const rawProducts: Product[] = [
     price: 280,
     category: "watches",
     image: watch2,
-    altImage: watch1,
+    altImage: watch2,
     video: watchVideo.url,
     rating: 4,
     reviews: 41,
     description:
-      "Automatic 38mm field watch with full-grain leather strap. A daily companion built to outlast trends.",
+      "Automatic 38mm field watch with full-grain leather strap and a brushed steel case. A daily companion built to outlast trends.",
     sizes: watchSizes,
-    variants: [
-      { name: "Brushed Steel", swatch: "#b8b8bd", image: watch2 },
-      { name: "Stealth Matte", swatch: "#1a1a1a", image: watch1 },
-    ],
+    variants: [{ name: "Brushed Steel", swatch: "#b8b8bd", image: watch2 }],
   },
+
   {
     id: "diver-200-blue",
     name: "Diver 200",
