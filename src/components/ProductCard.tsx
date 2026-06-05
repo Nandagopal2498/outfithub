@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import type { Product } from "@/lib/products";
+import { type Product, getProductStock } from "@/lib/products";
 import { useCart } from "@/lib/cart";
 import { useWishlist } from "@/lib/wishlist";
 import { Heart, Star, Eye } from "lucide-react";
@@ -27,6 +27,18 @@ export function ProductCard({ product }: { product: Product }) {
   const displayImage = activeVariant.image;
   const variantPreviewing = hoverVariant !== null;
 
+  // Determine stock availability for currently selected variant & size
+  const stock = getProductStock(product.id, product.variants[selectedVariant].name, selectedSize);
+  let stockMsg = "In Stock";
+  let stockColorClass = "text-green-600 dark:text-green-500 bg-green-600";
+  if (stock === 0) {
+    stockMsg = "Sold Out";
+    stockColorClass = "text-destructive bg-destructive";
+  } else if (stock <= 3) {
+    stockMsg = `Only ${stock} left`;
+    stockColorClass = "text-amber-600 dark:text-amber-500 bg-amber-600";
+  }
+
   const handleMouseEnter = () => {
     if (!variantPreviewing) videoRef.current?.play();
   };
@@ -40,11 +52,21 @@ export function ProductCard({ product }: { product: Product }) {
   };
 
   return (
-    <div className="group" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+    <div className="group animate-fade-in" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       <Link
         to="/product/$id"
         params={{ id: product.id }}
-        className="block relative aspect-[3/4] overflow-hidden bg-surface mb-5"
+        search={{ color: product.variants[selectedVariant].name, size: selectedSize }}
+        className="block relative aspect-[3/4] overflow-hidden bg-surface mb-5 focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2 outline-none"
+        onFocus={() => {
+          if (!variantPreviewing) videoRef.current?.play();
+        }}
+        onBlur={() => {
+          if (videoRef.current) {
+            videoRef.current.pause();
+            videoRef.current.currentTime = 0;
+          }
+        }}
       >
         <img
           src={displayImage}
@@ -52,9 +74,8 @@ export function ProductCard({ product }: { product: Product }) {
           loading="lazy"
           width={800}
           height={1024}
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
-            variantPreviewing ? "opacity-100" : "group-hover:opacity-0"
-          }`}
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${variantPreviewing ? "opacity-100" : "group-hover:opacity-0 group-focus-within:opacity-0"
+            }`}
         />
         {product.video ? (
           <video
@@ -64,9 +85,8 @@ export function ProductCard({ product }: { product: Product }) {
             loop
             playsInline
             preload="none"
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
-              variantPreviewing ? "opacity-0" : "opacity-0 group-hover:opacity-100"
-            }`}
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${variantPreviewing ? "opacity-0" : "opacity-0 group-hover:opacity-100 group-focus-within:opacity-100"
+              }`}
           />
         ) : (
           <img
@@ -76,9 +96,8 @@ export function ProductCard({ product }: { product: Product }) {
             loading="lazy"
             width={800}
             height={1024}
-            className={`absolute inset-0 w-full h-full object-cover scale-105 transition-all duration-700 ${
-              variantPreviewing ? "opacity-0" : "group-hover:scale-100"
-            }`}
+            className={`absolute inset-0 w-full h-full object-cover scale-105 transition-all duration-700 ${variantPreviewing ? "opacity-0" : "group-hover:scale-100 group-focus-within:scale-100"
+              }`}
           />
         )}
         {product.badge && (
@@ -86,14 +105,14 @@ export function ProductCard({ product }: { product: Product }) {
             {product.badge}
           </span>
         )}
-        <div className="absolute top-3 right-3 flex flex-col gap-2">
+        <div className="absolute top-3 right-3 flex flex-col gap-2 z-10">
           <button
             onClick={(e) => {
               e.preventDefault();
               toggle(product.id);
             }}
             aria-label={saved ? "Remove from wishlist" : "Save to wishlist"}
-            className="w-9 h-9 grid place-items-center bg-background/80 backdrop-blur hover:bg-background transition-colors"
+            className="w-9 h-9 grid place-items-center bg-background/80 backdrop-blur hover:bg-background transition-colors focus:ring-2 focus:ring-foreground focus:outline-none"
           >
             <Heart className={`size-4 ${saved ? "fill-foreground text-foreground" : ""}`} />
           </button>
@@ -103,7 +122,7 @@ export function ProductCard({ product }: { product: Product }) {
               setQuickOpen(true);
             }}
             aria-label="Quick view"
-            className="w-9 h-9 grid place-items-center bg-background/80 backdrop-blur hover:bg-background transition-colors opacity-0 group-hover:opacity-100"
+            className="w-9 h-9 grid place-items-center bg-background/80 backdrop-blur hover:bg-background transition-colors opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 focus:opacity-100 focus-visible:opacity-100 focus:ring-2 focus:ring-foreground focus:outline-none"
           >
             <Eye className="size-4" strokeWidth={1.75} />
           </button>
@@ -111,11 +130,17 @@ export function ProductCard({ product }: { product: Product }) {
         <button
           onClick={(e) => {
             e.preventDefault();
-            add(product.id, selectedSize, 1, product.variants[selectedVariant].name);
+            if (stock > 0) {
+              add(product.id, selectedSize, 1, product.variants[selectedVariant].name);
+            }
           }}
-          className="absolute bottom-0 left-0 w-full py-4 bg-foreground text-background text-[10px] font-bold uppercase tracking-widest translate-y-full group-hover:translate-y-0 transition-transform"
+          disabled={stock === 0}
+          className={`absolute bottom-0 left-0 w-full py-4 text-[10px] font-bold uppercase tracking-widest translate-y-full group-hover:translate-y-0 group-focus-within:translate-y-0 focus:translate-y-0 focus-visible:translate-y-0 transition-transform focus:outline-none z-10 ${stock === 0
+              ? "bg-muted text-muted-foreground cursor-not-allowed opacity-80"
+              : "bg-foreground text-background hover:bg-foreground/90"
+            }`}
         >
-          Quick Add · {selectedSize}
+          {stock === 0 ? "Sold Out" : `Quick Add · ${selectedSize}`}
         </button>
       </Link>
 
@@ -153,12 +178,12 @@ export function ProductCard({ product }: { product: Product }) {
                 aria-pressed={selectedVariant === i}
                 onMouseEnter={() => setHoverVariant(i)}
                 onFocus={() => setHoverVariant(i)}
+                onBlur={() => setHoverVariant(null)}
                 onClick={() => setSelectedVariant(i)}
-                className={`w-3.5 h-3.5 rounded-full border transition-transform hover:scale-125 ${
-                  selectedVariant === i
+                className={`w-3.5 h-3.5 rounded-full border transition-transform hover:scale-125 focus:scale-125 focus:outline-none ${selectedVariant === i
                     ? "border-foreground scale-125 ring-1 ring-foreground ring-offset-1 ring-offset-background"
                     : "border-border"
-                }`}
+                  }`}
                 style={{ backgroundColor: v.swatch }}
               />
             ))}
@@ -173,15 +198,19 @@ export function ProductCard({ product }: { product: Product }) {
             type="button"
             onClick={() => setSelectedSize(s)}
             aria-pressed={selectedSize === s}
-            className={`min-w-[28px] px-1.5 py-1 text-[10px] font-bold tracking-wider border transition-colors ${
-              selectedSize === s
+            className={`min-w-[28px] px-1.5 py-1 text-[10px] font-bold tracking-wider border transition-colors focus:ring-1 focus:ring-foreground focus:outline-none ${selectedSize === s
                 ? "border-foreground bg-foreground text-background"
                 : "border-border text-muted-foreground hover:border-foreground hover:text-foreground"
-            }`}
+              }`}
           >
             {s}
           </button>
         ))}
+      </div>
+
+      <div className="mt-3 flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider">
+        <span className={`w-1.5 h-1.5 rounded-full ${stockColorClass.split(' ')[2]}`} />
+        <span className={stockColorClass.split(' ').slice(0, 2).join(' ')}>{stockMsg}</span>
       </div>
 
       <QuickView product={product} open={quickOpen} onOpenChange={setQuickOpen} />

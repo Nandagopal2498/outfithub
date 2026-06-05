@@ -52,6 +52,7 @@ function CartPage() {
                     <Link
                       to="/product/$id"
                       params={{ id: product.id }}
+                      search={{ color: item.variant, size: item.size }}
                       className="w-24 md:w-32 aspect-[3/4] bg-surface overflow-hidden shrink-0"
                     >
                       <img

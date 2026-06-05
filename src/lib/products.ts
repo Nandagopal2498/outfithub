@@ -932,3 +932,15 @@ export const categories: { id: Category; label: string }[] = [
 ];
 
 export const getProduct = (id: string) => products.find((p) => p.id === id);
+
+export function getProductStock(productId: string, color: string, size: string): number {
+  const str = `${productId}-${color}-${size}`;
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = (hash << 5) - hash + str.charCodeAt(i);
+    hash |= 0;
+  }
+  const stock = Math.abs(hash) % 16;
+  return stock;
+}
+

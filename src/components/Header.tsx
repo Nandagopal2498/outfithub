@@ -1,9 +1,17 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { Heart, Menu, Search, User, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useCart } from "@/lib/cart";
 import { useWishlist } from "@/lib/wishlist";
-import { categories } from "@/lib/products";
+import { categories, products } from "@/lib/products";
+import {
+  CommandDialog,
+  CommandInput,
+  CommandList,
+  CommandEmpty,
+  CommandGroup,
+  CommandItem,
+} from "@/components/ui/command";
 
 export function AnnouncementBar() {
   return (
@@ -17,6 +25,19 @@ export function Header() {
   const { count } = useCart();
   const { count: wishCount } = useWishlist();
   const [open, setOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const down = (e: KeyboardEvent) => {
+      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        setSearchOpen((prev) => !prev);
+      }
+    };
+    document.addEventListener("keydown", down);
+    return () => document.removeEventListener("keydown", down);
+  }, []);
 
   return (
     <>
@@ -47,7 +68,11 @@ export function Header() {
           </Link>
 
           <div className="flex-1 flex justify-end items-center gap-5 md:gap-6">
-            <button className="hidden sm:flex items-center gap-1.5 group" aria-label="Search">
+            <button
+              onClick={() => setSearchOpen(true)}
+              className="flex items-center gap-1.5 group hover:opacity-50 transition-opacity focus:outline-none"
+              aria-label="Search"
+            >
               <Search className="size-4" />
               <span className="hidden lg:inline text-[13px] font-semibold uppercase">Search</span>
             </button>
@@ -109,6 +134,33 @@ export function Header() {
           </div>
         </div>
       )}
+
+      <CommandDialog open={searchOpen} onOpenChange={setSearchOpen}>
+        <CommandInput placeholder="Search collections, products..." />
+        <CommandList className="max-h-[350px] overflow-y-auto">
+          <CommandEmpty>No results found.</CommandEmpty>
+          <CommandGroup heading="Products">
+            {products.map((p) => (
+              <CommandItem
+                key={p.id}
+                value={`${p.name} ${p.color} ${p.category}`}
+                onSelect={() => {
+                  setSearchOpen(false);
+                  navigate({ to: "/product/$id", params: { id: p.id } });
+                }}
+                className="flex items-center gap-3 p-2 cursor-pointer hover:bg-accent rounded-sm"
+              >
+                <img src={p.image} alt="" className="size-10 object-cover bg-surface" />
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs font-bold uppercase tracking-tight truncate">{p.name}</p>
+                  <p className="text-[10px] text-muted-foreground truncate">{p.color} · {p.category}</p>
+                </div>
+                <span className="text-xs font-bold">${p.price}</span>
+              </CommandItem>
+            ))}
+          </CommandGroup>
+        </CommandList>
+      </CommandDialog>
     </>
   );
 }
