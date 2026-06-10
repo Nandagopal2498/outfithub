@@ -1,9 +1,11 @@
 import { Link, useNavigate } from "@tanstack/react-router";
-import { Heart, Menu, Search, User, X } from "lucide-react";
+import { Heart, LogOut, Menu, Search, User, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useCart } from "@/lib/cart";
 import { useWishlist } from "@/lib/wishlist";
+import { useAuth } from "@/lib/auth";
 import { categories, products } from "@/lib/products";
+import { toast } from "sonner";
 import {
   CommandDialog,
   CommandInput,
@@ -24,9 +26,16 @@ export function AnnouncementBar() {
 export function Header() {
   const { count } = useCart();
   const { count: wishCount } = useWishlist();
+  const { user, signOut } = useAuth();
   const [open, setOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    await signOut();
+    toast.success("Signed out");
+    navigate({ to: "/" });
+  };
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -76,10 +85,22 @@ export function Header() {
               <Search className="size-4" />
               <span className="hidden lg:inline text-[13px] font-semibold uppercase">Search</span>
             </button>
-            <Link to="/login" className="hidden sm:flex items-center gap-1.5" aria-label="Account">
-              <User className="size-4" />
-              <span className="hidden lg:inline text-[13px] font-semibold uppercase">Account</span>
-            </Link>
+            {user ? (
+              <button
+                onClick={handleSignOut}
+                className="hidden sm:flex items-center gap-1.5 hover:opacity-50 transition-opacity"
+                aria-label="Sign out"
+                title={user.email ?? "Sign out"}
+              >
+                <LogOut className="size-4" />
+                <span className="hidden lg:inline text-[13px] font-semibold uppercase">Sign Out</span>
+              </button>
+            ) : (
+              <Link to="/login" className="hidden sm:flex items-center gap-1.5" aria-label="Account">
+                <User className="size-4" />
+                <span className="hidden lg:inline text-[13px] font-semibold uppercase">Account</span>
+              </Link>
+            )}
             <Link
               to="/wishlist"
               className="flex items-center gap-1.5 relative"
