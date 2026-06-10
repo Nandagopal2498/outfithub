@@ -1,9 +1,11 @@
 import { Link, useNavigate } from "@tanstack/react-router";
-import { Heart, Menu, Search, User, X } from "lucide-react";
+import { Heart, LogOut, Menu, Search, User, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useCart } from "@/lib/cart";
 import { useWishlist } from "@/lib/wishlist";
+import { useAuth } from "@/lib/auth";
 import { categories, products } from "@/lib/products";
+import { toast } from "sonner";
 import {
   CommandDialog,
   CommandInput,

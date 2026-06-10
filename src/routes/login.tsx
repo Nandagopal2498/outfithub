@@ -1,6 +1,10 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
+import { useState, useEffect } from "react";
 import { GoogleSignInButton } from "@/components/GoogleSignInButton";
+import { lovable } from "@/integrations/lovable/index";
+import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/lib/auth";
+import { toast } from "sonner";
 
 export const Route = createFileRoute("/login")({
   component: LoginPage,
@@ -13,15 +17,42 @@ export const Route = createFileRoute("/login")({
 });
 
 function LoginPage() {
+  const navigate = useNavigate();
+  const { user, loading } = useAuth();
   const [mode, setMode] = useState<"signin" | "signup">("signin");
   const [error, setError] = useState<string | null>(null);
-  const [done, setDone] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  useEffect(() => {
+    if (!loading && user) {
+      navigate({ to: "/" });
+    }
+  }, [user, loading, navigate]);
+
+  const handleGoogle = async () => {
+    setError(null);
+    setGoogleLoading(true);
+    const result = await lovable.auth.signInWithOAuth("google", {
+      redirect_uri: window.location.origin,
+    });
+    if (result.error) {
+      setError(result.error.message || "Google sign-in failed.");
+      setGoogleLoading(false);
+      return;
+    }
+    if (result.redirected) return;
+    toast.success("Signed in");
+    navigate({ to: "/" });
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
     const email = String(form.get("email") || "").trim();
     const password = String(form.get("password") || "");
+    const fullName = String(form.get("name") || "").trim();
+
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       setError("Enter a valid email address.");
       return;
@@ -30,8 +61,34 @@ function LoginPage() {
       setError("Password must be at least 8 characters.");
       return;
     }
+
     setError(null);
-    setDone(true);
+    setSubmitting(true);
+    try {
+      if (mode === "signup") {
+        const { error: err } = await supabase.auth.signUp({
+          email,
+          password,
+          options: {
+            emailRedirectTo: window.location.origin,
+            data: { full_name: fullName },
+          },
+        });
+        if (err) throw err;
+        toast.success("Account created");
+        navigate({ to: "/" });
+      } else {
+        const { error: err } = await supabase.auth.signInWithPassword({ email, password });
+        if (err) throw err;
+        toast.success("Signed in");
+        navigate({ to: "/" });
+      }
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : "Authentication failed.";
+      setError(msg.includes("Invalid login") ? "Invalid email or password." : msg);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -67,65 +124,50 @@ function LoginPage() {
             {mode === "signin" ? "Welcome back to the circle." : "Start your VANTAGE membership."}
           </p>
 
-          {done ? (
-            <div className="border border-foreground p-8 text-center">
-              <p className="text-sm font-bold uppercase tracking-widest mb-3">
-                {mode === "signin" ? "Signed In" : "Welcome"}
-              </p>
-              <p className="text-sm text-muted-foreground mb-6">Authentication is a demo only.</p>
-              <Link
-                to="/"
-                className="inline-block bg-foreground text-background px-8 py-3 text-[11px] font-bold uppercase tracking-widest"
-              >
-                Continue
-              </Link>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} noValidate className="space-y-5">
-              <GoogleSignInButton
-                onClick={() => {
-                  setError(null);
-                  setDone(true);
-                }}
-              />
+          <form onSubmit={handleSubmit} noValidate className="space-y-5">
+            <GoogleSignInButton onClick={handleGoogle} isLoading={googleLoading} />
 
-              <div className="relative flex items-center justify-center py-1">
-                <div className="absolute inset-0 flex items-center">
-                  <span className="w-full border-t border-border" />
-                </div>
-                <span className="relative bg-background px-3 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
-                  or
-                </span>
+            <div className="relative flex items-center justify-center py-1">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t border-border" />
               </div>
+              <span className="relative bg-background px-3 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
+                or
+              </span>
+            </div>
 
-              {mode === "signup" && <Input name="name" type="text" label="Full Name" />}
-              <Input name="email" type="email" label="Email" />
-              <Input name="password" type="password" label="Password" />
+            {mode === "signup" && <Input name="name" type="text" label="Full Name" />}
+            <Input name="email" type="email" label="Email" />
+            <Input name="password" type="password" label="Password" />
 
-              {error && <p className="text-[11px] font-semibold text-destructive">{error}</p>}
+            {error && <p className="text-[11px] font-semibold text-destructive">{error}</p>}
 
+            <button
+              type="submit"
+              disabled={submitting}
+              className="w-full bg-foreground text-background py-4 text-[11px] font-bold uppercase tracking-widest hover:bg-foreground/90 transition-colors disabled:opacity-60"
+            >
+              {submitting ? "Please wait…" : mode === "signin" ? "Sign In" : "Create Account"}
+            </button>
+
+            <p className="text-xs text-center text-muted-foreground pt-4">
+              {mode === "signin" ? "New to VANTAGE?" : "Already a member?"}{" "}
               <button
-                type="submit"
-                className="w-full bg-foreground text-background py-4 text-[11px] font-bold uppercase tracking-widest hover:bg-foreground/90 transition-colors"
+                type="button"
+                onClick={() => {
+                  setMode(mode === "signin" ? "signup" : "signin");
+                  setError(null);
+                }}
+                className="text-foreground font-bold uppercase tracking-widest text-[11px] border-b border-foreground"
               >
-                {mode === "signin" ? "Sign In" : "Create Account"}
+                {mode === "signin" ? "Create Account" : "Sign In"}
               </button>
+            </p>
+          </form>
 
-              <p className="text-xs text-center text-muted-foreground pt-4">
-                {mode === "signin" ? "New to VANTAGE?" : "Already a member?"}{" "}
-                <button
-                  type="button"
-                  onClick={() => {
-                    setMode(mode === "signin" ? "signup" : "signin");
-                    setError(null);
-                  }}
-                  className="text-foreground font-bold uppercase tracking-widest text-[11px] border-b border-foreground"
-                >
-                  {mode === "signin" ? "Create Account" : "Sign In"}
-                </button>
-              </p>
-            </form>
-          )}
+          <p className="text-[10px] text-center text-muted-foreground mt-6">
+            <Link to="/" className="hover:text-foreground">Back to shopping</Link>
+          </p>
         </div>
       </div>
     </div>
