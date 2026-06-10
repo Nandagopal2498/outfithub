@@ -105,9 +105,9 @@ function ProductPage() {
       const variantName = product.variants[nextIdx].name;
       setActiveMedia(product.variants[nextIdx].image);
       navigate({
-        search: (prev) => ({ ...prev, color: variantName }),
+        search: (prev) => ({ category: prev.category, color: variantName, size: prev.size }),
         replace: true,
-      });
+      } as Parameters<typeof navigate>[0]);
       setTimeout(() => {
         const parent = e.currentTarget.parentElement;
         const buttons = parent?.querySelectorAll("button");
@@ -135,9 +135,9 @@ function ProductPage() {
       e.preventDefault();
       const nextSize = product.sizes[nextIdx];
       navigate({
-        search: (prev) => ({ ...prev, size: nextSize }),
+        search: (prev) => ({ category: prev.category, color: prev.color, size: nextSize }),
         replace: true,
-      });
+      } as Parameters<typeof navigate>[0]);
       setTimeout(() => {
         const parent = e.currentTarget.parentElement;
         const buttons = parent?.querySelectorAll("button");
