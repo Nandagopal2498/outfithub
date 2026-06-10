@@ -26,9 +26,16 @@ export function AnnouncementBar() {
 export function Header() {
   const { count } = useCart();
   const { count: wishCount } = useWishlist();
+  const { user, signOut } = useAuth();
   const [open, setOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    await signOut();
+    toast.success("Signed out");
+    navigate({ to: "/" });
+  };
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
