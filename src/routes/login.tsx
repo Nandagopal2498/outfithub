@@ -82,6 +82,22 @@ function LoginPage() {
             </div>
           ) : (
             <form onSubmit={handleSubmit} noValidate className="space-y-5">
+              <GoogleSignInButton
+                onClick={() => {
+                  setError(null);
+                  setDone(true);
+                }}
+              />
+
+              <div className="relative flex items-center justify-center py-1">
+                <div className="absolute inset-0 flex items-center">
+                  <span className="w-full border-t border-border" />
+                </div>
+                <span className="relative bg-background px-3 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
+                  or
+                </span>
+              </div>
+
               {mode === "signup" && <Input name="name" type="text" label="Full Name" />}
               <Input name="email" type="email" label="Email" />
               <Input name="password" type="password" label="Password" />
