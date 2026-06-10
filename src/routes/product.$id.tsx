@@ -75,16 +75,16 @@ function ProductPage() {
     const variantName = product.variants[i].name;
     setActiveMedia(product.variants[i].image);
     navigate({
-      search: (prev) => ({ ...prev, color: variantName }),
+      search: (prev) => ({ category: prev.category, color: variantName, size: prev.size }),
       replace: true,
-    });
+    } as Parameters<typeof navigate>[0]);
   };
 
   const handleSelectSize = (s: string) => {
     navigate({
-      search: (prev) => ({ ...prev, size: s }),
+      search: (prev) => ({ category: prev.category, color: prev.color, size: s }),
       replace: true,
-    });
+    } as Parameters<typeof navigate>[0]);
   };
 
   const handleSwatchKeyDown = (e: React.KeyboardEvent, index: number) => {
