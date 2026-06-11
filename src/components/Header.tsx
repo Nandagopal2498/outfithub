@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "@tanstack/react-router";
+import { Link, useNavigate, useLocation } from "@tanstack/react-router";
 import { Heart, LogOut, Menu, Search, User, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useCart } from "@/lib/cart";
@@ -30,6 +30,8 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  const loginRedirect = location.pathname === "/login" ? "/" : location.pathname + location.search;
 
   const handleSignOut = async () => {
     await signOut();
@@ -96,7 +98,7 @@ export function Header() {
                 <span className="hidden lg:inline text-[13px] font-semibold uppercase">Sign Out</span>
               </button>
             ) : (
-              <Link to="/login" className="hidden sm:flex items-center gap-1.5" aria-label="Account">
+              <Link to="/login" search={{ redirect: loginRedirect }} className="hidden sm:flex items-center gap-1.5" aria-label="Account">
                 <User className="size-4" />
                 <span className="hidden lg:inline text-[13px] font-semibold uppercase">Account</span>
               </Link>
@@ -147,6 +149,7 @@ export function Header() {
             ))}
             <Link
               to="/login"
+              search={{ redirect: loginRedirect }}
               onClick={() => setOpen(false)}
               className="text-2xl font-extrabold uppercase italic tracking-tighter"
             >

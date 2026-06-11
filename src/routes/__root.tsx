@@ -1,11 +1,29 @@
+import { useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Outlet, createRootRouteWithContext, useRouter } from "@tanstack/react-router";
+import { Outlet, createRootRouteWithContext, useRouter, useNavigate } from "@tanstack/react-router";
 
 import { CartProvider } from "@/lib/cart";
 import { WishlistProvider } from "@/lib/wishlist";
-import { AuthProvider } from "@/lib/auth";
+import { AuthProvider, useAuth } from "@/lib/auth";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+
+function AuthRedirectHandler() {
+  const { user, loading } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!loading && user) {
+      const pending = sessionStorage.getItem("auth_redirect");
+      if (pending) {
+        sessionStorage.removeItem("auth_redirect");
+        window.location.replace(pending);
+      }
+    }
+  }, [user, loading, navigate]);
+
+  return null;
+}
 
 function NotFoundComponent() {
   return (
@@ -62,6 +80,7 @@ function RootComponent() {
       <AuthProvider>
         <CartProvider>
           <WishlistProvider>
+            <AuthRedirectHandler />
             <div className="min-h-screen flex flex-col">
               <Header />
               <main className="flex-1">

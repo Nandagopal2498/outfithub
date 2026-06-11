@@ -1,4 +1,5 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
+import { z } from "zod";
 import { useState, useEffect } from "react";
 import { GoogleSignInButton } from "@/components/GoogleSignInButton";
 import { lovable } from "@/integrations/lovable/index";
@@ -6,7 +7,12 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/auth";
 import { toast } from "sonner";
 
+const loginSearchSchema = z.object({
+  redirect: z.string().optional(),
+});
+
 export const Route = createFileRoute("/login")({
+  validateSearch: loginSearchSchema,
   component: LoginPage,
   head: () => ({
     meta: [
@@ -18,6 +24,7 @@ export const Route = createFileRoute("/login")({
 
 function LoginPage() {
   const navigate = useNavigate();
+  const { redirect } = Route.useSearch();
   const { user, loading } = useAuth();
   const [mode, setMode] = useState<"signin" | "signup">("signin");
   const [error, setError] = useState<string | null>(null);
@@ -26,13 +33,16 @@ function LoginPage() {
 
   useEffect(() => {
     if (!loading && user) {
-      navigate({ to: "/" });
+      navigate({ to: redirect || "/" });
     }
-  }, [user, loading, navigate]);
+  }, [user, loading, navigate, redirect]);
 
   const handleGoogle = async () => {
     setError(null);
     setGoogleLoading(true);
+    if (redirect) {
+      sessionStorage.setItem("auth_redirect", redirect);
+    }
     const result = await lovable.auth.signInWithOAuth("google", {
       redirect_uri: window.location.origin,
     });
@@ -43,7 +53,7 @@ function LoginPage() {
     }
     if (result.redirected) return;
     toast.success("Signed in");
-    navigate({ to: "/" });
+    navigate({ to: redirect || "/" });
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -76,12 +86,12 @@ function LoginPage() {
         });
         if (err) throw err;
         toast.success("Account created");
-        navigate({ to: "/" });
+        navigate({ to: redirect || "/" });
       } else {
         const { error: err } = await supabase.auth.signInWithPassword({ email, password });
         if (err) throw err;
         toast.success("Signed in");
-        navigate({ to: "/" });
+        navigate({ to: redirect || "/" });
       }
     } catch (err) {
       const msg = err instanceof Error ? err.message : "Authentication failed.";
