@@ -31,7 +31,7 @@ export function Header() {
   const [searchOpen, setSearchOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  const loginRedirect = location.pathname === "/login" ? "/" : location.pathname + location.search;
+  const loginRedirect = location.pathname === "/login" ? "/" : location.href;
 
   const handleSignOut = async () => {
     await signOut();
