@@ -5,7 +5,7 @@ import tsconfigPaths from "vite-tsconfig-paths";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
-  base: "/OutfitHub/",
+  base: "/outfithub/",
   plugins: [
     TanStackRouterVite({
       routesDirectory: "./src/routes",
