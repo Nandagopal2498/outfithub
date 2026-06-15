@@ -3,7 +3,7 @@ import { type Product, getProductStock } from "@/lib/products";
 import { useCart } from "@/lib/cart";
 import { useWishlist } from "@/lib/wishlist";
 import { Heart, Star, Eye } from "lucide-react";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { QuickView } from "@/components/QuickView";
 
 export function ProductCard({ product }: { product: Product }) {
@@ -11,7 +11,6 @@ export function ProductCard({ product }: { product: Product }) {
   const { has, toggle } = useWishlist();
   const saved = has(product.id);
   const stars = Array.from({ length: 5 }, (_, i) => i < product.rating);
-  const videoRef = useRef<HTMLVideoElement>(null);
 
   const initialIdx = Math.max(
     0,
@@ -39,34 +38,13 @@ export function ProductCard({ product }: { product: Product }) {
     stockColorClass = "text-amber-600 dark:text-amber-500 bg-amber-600";
   }
 
-  const handleMouseEnter = () => {
-    if (!variantPreviewing) videoRef.current?.play();
-  };
-
-  const handleMouseLeave = () => {
-    if (videoRef.current) {
-      videoRef.current.pause();
-      videoRef.current.currentTime = 0;
-    }
-    setHoverVariant(null);
-  };
-
   return (
-    <div className="group animate-fade-in" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+    <div className="group animate-fade-in" onMouseLeave={() => setHoverVariant(null)}>
       <Link
         to="/product/$id"
         params={{ id: product.id }}
         search={{ color: product.variants[selectedVariant].name, size: selectedSize }}
         className="block relative aspect-[3/4] overflow-hidden bg-surface mb-5 focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2 outline-none"
-        onFocus={() => {
-          if (!variantPreviewing) videoRef.current?.play();
-        }}
-        onBlur={() => {
-          if (videoRef.current) {
-            videoRef.current.pause();
-            videoRef.current.currentTime = 0;
-          }
-        }}
       >
         <img
           src={displayImage}
@@ -77,29 +55,16 @@ export function ProductCard({ product }: { product: Product }) {
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${variantPreviewing ? "opacity-100" : "group-hover:opacity-0 group-focus-within:opacity-0"
             }`}
         />
-        {product.video ? (
-          <video
-            ref={videoRef}
-            src={product.video}
-            muted
-            loop
-            playsInline
-            preload="none"
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${variantPreviewing ? "opacity-0" : "opacity-0 group-hover:opacity-100 group-focus-within:opacity-100"
-              }`}
-          />
-        ) : (
-          <img
-            src={product.altImage}
-            alt=""
-            aria-hidden
-            loading="lazy"
-            width={800}
-            height={1024}
-            className={`absolute inset-0 w-full h-full object-cover scale-105 transition-all duration-700 ${variantPreviewing ? "opacity-0" : "group-hover:scale-100 group-focus-within:scale-100"
-              }`}
-          />
-        )}
+        <img
+          src={product.altImage}
+          alt=""
+          aria-hidden
+          loading="lazy"
+          width={800}
+          height={1024}
+          className={`absolute inset-0 w-full h-full object-cover scale-105 transition-all duration-700 ${variantPreviewing ? "opacity-0" : "group-hover:scale-100 group-focus-within:scale-100"
+            }`}
+        />
         {product.badge && (
           <span className="absolute top-4 left-4 bg-foreground text-background text-[9px] font-bold uppercase px-2 py-1 tracking-tighter">
             {product.badge}

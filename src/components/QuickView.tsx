@@ -3,7 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { type Product, products, getProductStock } from "@/lib/products";
 import { useCart } from "@/lib/cart";
-import { Star, Play } from "lucide-react";
+import { Star } from "lucide-react";
 
 interface QuickViewProps {
   product: Product;
@@ -33,12 +33,10 @@ export function QuickView({ product, open, onOpenChange }: QuickViewProps) {
   // Extract unique gallery items for selected color
   const galleryItems = [
     matchingProduct.image,
-    matchingProduct.altImage,
-    ...(matchingProduct.video ? [matchingProduct.video] : [])
+    matchingProduct.altImage
   ].filter((value, index, self) => self.indexOf(value) === index);
 
   const displayMedia = activeMedia || variant.image;
-  const isVideoActive = displayMedia === matchingProduct.video || displayMedia === product.video;
 
   // Determine stock availability
   const stock = getProductStock(product.id, variant.name, size);
@@ -113,10 +111,11 @@ export function QuickView({ product, open, onOpenChange }: QuickViewProps) {
   const handleAdd = () => {
     add(product.id, size, 1, variant.name);
     setAdded(true);
+    // Close dialog after brief feedback — cart drawer opens automatically
     setTimeout(() => {
       setAdded(false);
       onOpenChange(false);
-    }, 900);
+    }, 400);
   };
 
   return (
@@ -128,53 +127,26 @@ export function QuickView({ product, open, onOpenChange }: QuickViewProps) {
           {/* Gallery Media */}
           <div className="flex flex-col h-full bg-surface">
             <div className="flex-1 relative aspect-square md:aspect-[4/5] overflow-hidden min-h-[350px]">
-              {isVideoActive ? (
-                <video
-                  src={displayMedia}
-                  muted
-                  loop
-                  playsInline
-                  autoPlay
-                  className="w-full h-full absolute inset-0 object-cover"
-                />
-              ) : (
-                <img
-                  src={displayMedia}
-                  alt={`${product.name} — ${variant.name}`}
-                  className="w-full h-full absolute inset-0 object-cover"
-                />
-              )}
+              <img
+                src={displayMedia}
+                alt={`${product.name} — ${variant.name}`}
+                className="w-full h-full absolute inset-0 object-cover"
+              />
             </div>
             {galleryItems.length > 1 && (
               <div className="flex gap-2 p-3 border-t border-border overflow-x-auto shrink-0 bg-background justify-center">
-                {galleryItems.map((src) => {
-                  const isVideo = src === matchingProduct.video || src === product.video;
-                  return (
-                    <button
-                      key={src}
-                      type="button"
-                      onClick={() => setActiveMedia(src)}
-                      className={`size-12 overflow-hidden bg-surface border-2 transition-colors ${
-                        displayMedia === src ? "border-foreground" : "border-transparent"
-                      }`}
-                    >
-                      {isVideo ? (
-                        <div className="w-full h-full relative">
-                          <img
-                            src={matchingProduct.image}
-                            alt=""
-                            className="w-full h-full object-cover"
-                          />
-                          <div className="absolute inset-0 grid place-items-center bg-black/30">
-                            <Play className="size-3 text-white fill-white" />
-                          </div>
-                        </div>
-                      ) : (
-                        <img src={src} alt="" className="w-full h-full object-cover" />
-                      )}
-                    </button>
-                  );
-                })}
+                {galleryItems.map((src) => (
+                  <button
+                    key={src}
+                    type="button"
+                    onClick={() => setActiveMedia(src)}
+                    className={`size-12 overflow-hidden bg-surface border-2 transition-colors ${
+                      displayMedia === src ? "border-foreground" : "border-transparent"
+                    }`}
+                  >
+                    <img src={src} alt="" className="w-full h-full object-cover" />
+                  </button>
+                ))}
               </div>
             )}
           </div>

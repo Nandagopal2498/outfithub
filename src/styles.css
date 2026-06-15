@@ -98,3 +98,54 @@
 .animate-fade-up {
   animation: fade-up 0.7s cubic-bezier(0.19, 1, 0.22, 1) both;
 }
+
+@keyframes cart-bounce {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.45); }
+  50% { transform: scale(0.9); }
+  70% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+.animate-cart-bounce {
+  animation: cart-bounce 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+@keyframes slide-item-in {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.animate-slide-item-in {
+  animation: slide-item-in 0.4s cubic-bezier(0.19, 1, 0.22, 1) both;
+}
+
+@keyframes progress-fill {
+  from { width: 0%; }
+}
+.animate-progress-fill {
+  animation: progress-fill 0.8s cubic-bezier(0.19, 1, 0.22, 1) both;
+}
+
+@keyframes highlight-pulse {
+  0% { background-color: transparent; }
+  20% { background-color: oklch(0.97 0.01 100); }
+  100% { background-color: transparent; }
+}
+.cart-item-highlight {
+  animation: highlight-pulse 1.8s ease-out;
+}
+
+@keyframes shimmer-bar {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.shipping-bar-shimmer {
+  background-size: 200% 100%;
+  background-image: linear-gradient(90deg, transparent 30%, rgba(255,255,255,0.25) 50%, transparent 70%);
+  animation: shimmer-bar 2s ease-in-out infinite;
+}

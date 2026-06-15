@@ -1,11 +1,12 @@
 import { Link, useNavigate, useLocation } from "@tanstack/react-router";
 import { Heart, LogOut, Menu, Search, User, X } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useCart } from "@/lib/cart";
 import { useWishlist } from "@/lib/wishlist";
 import { useAuth } from "@/lib/auth";
 import { categories, products } from "@/lib/products";
 import { toast } from "sonner";
+import { CartDrawer } from "@/components/CartDrawer";
 import {
   CommandDialog,
   CommandInput,
@@ -24,7 +25,7 @@ export function AnnouncementBar() {
 }
 
 export function Header() {
-  const { count } = useCart();
+  const { count, openDrawer } = useCart();
   const { count: wishCount } = useWishlist();
   const { user, signOut } = useAuth();
   const [open, setOpen] = useState(false);
@@ -32,6 +33,19 @@ export function Header() {
   const navigate = useNavigate();
   const location = useLocation();
   const loginRedirect = location.pathname === "/login" ? "/" : location.href;
+
+  // Animate badge on count change
+  const badgeRef = useRef<HTMLSpanElement>(null);
+  const prevCount = useRef(count);
+  useEffect(() => {
+    if (count !== prevCount.current && badgeRef.current) {
+      badgeRef.current.classList.remove("animate-cart-bounce");
+      // Force reflow to restart the animation
+      void badgeRef.current.offsetWidth;
+      badgeRef.current.classList.add("animate-cart-bounce");
+    }
+    prevCount.current = count;
+  }, [count]);
 
   const handleSignOut = async () => {
     await signOut();
@@ -115,12 +129,15 @@ export function Header() {
                 </span>
               )}
             </Link>
-            <Link to="/cart" className="flex items-center gap-2 group" aria-label="Cart">
+            <button onClick={openDrawer} className="flex items-center gap-2 group cursor-pointer" aria-label="Cart">
               <span className="text-[13px] font-semibold uppercase">Cart</span>
-              <span className="bg-foreground text-background text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold">
+              <span
+                ref={badgeRef}
+                className="bg-foreground text-background text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold"
+              >
                 {count}
               </span>
-            </Link>
+            </button>
           </div>
         </div>
       </nav>
@@ -185,6 +202,8 @@ export function Header() {
           </CommandGroup>
         </CommandList>
       </CommandDialog>
+
+      <CartDrawer />
     </>
   );
 }

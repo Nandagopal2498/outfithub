@@ -3,7 +3,7 @@ import { useState } from "react";
 import { z } from "zod";
 import { useCart } from "@/lib/cart";
 import { getProduct } from "@/lib/products";
-import { Check } from "lucide-react";
+import { Check, Tag } from "lucide-react";
 
 export const Route = createFileRoute("/checkout")({
   component: CheckoutPage,
@@ -40,14 +40,13 @@ const schema = z.object({
 type Errors = Partial<Record<keyof z.infer<typeof schema>, string>>;
 
 function CheckoutPage() {
-  const { items, subtotal, clear } = useCart();
+  const { items, subtotal, shipping, discount, total, promoCode, clear } = useCart();
   const navigate = useNavigate();
   const [errors, setErrors] = useState<Errors>({});
   const [submitted, setSubmitted] = useState(false);
 
-  const shipping = subtotal > 150 || subtotal === 0 ? 0 : 12;
   const tax = +(subtotal * 0.08).toFixed(2);
-  const total = subtotal + shipping + tax;
+  const grandTotal = +(total + tax).toFixed(2);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -196,12 +195,21 @@ function CheckoutPage() {
             </ul>
             <div className="space-y-2 text-sm py-6 border-b border-border">
               <Row label="Subtotal" value={`$${subtotal.toFixed(2)}`} />
+              {discount > 0 && (
+                <div className="flex justify-between text-green-700">
+                  <span className="flex items-center gap-1.5 text-sm">
+                    <Tag className="size-3" />
+                    Discount ({promoCode})
+                  </span>
+                  <span className="font-semibold text-sm">-${discount.toFixed(2)}</span>
+                </div>
+              )}
               <Row label="Shipping" value={shipping === 0 ? "Free" : `$${shipping.toFixed(2)}`} />
               <Row label="Tax" value={`$${tax.toFixed(2)}`} />
             </div>
             <div className="flex justify-between text-base font-bold py-6">
               <span>Total</span>
-              <span>${total.toFixed(2)}</span>
+              <span>${grandTotal.toFixed(2)}</span>
             </div>
             <button
               type="submit"

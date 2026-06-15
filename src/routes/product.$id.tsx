@@ -1,10 +1,10 @@
 import { createFileRoute, Link, notFound, useNavigate } from "@tanstack/react-router";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { getProduct, products, getProductStock } from "@/lib/products";
 import { useCart } from "@/lib/cart";
 import { useWishlist } from "@/lib/wishlist";
 import { ProductCard } from "@/components/ProductCard";
-import { Heart, Star, Truck, Recycle, Play } from "lucide-react";
+import { Heart, Star, Truck, Recycle } from "lucide-react";
 import { z } from "zod";
 
 const productSearchSchema = z.object({
@@ -54,8 +54,6 @@ function ProductPage() {
   const displayMedia = activeMedia || activeVariant.image;
 
   const [added, setAdded] = useState(false);
-  const mainVideoRef = useRef<HTMLVideoElement>(null);
-  const isVideoActive = displayMedia === product.video;
 
   const related = products.filter((p) => p.category === product.category && p.id !== product.id);
 
@@ -151,7 +149,8 @@ function ProductPage() {
   const handleAdd = () => {
     add(product.id, activeSize, 1, activeVariant.name);
     setAdded(true);
-    setTimeout(() => setAdded(false), 1800);
+    // Cart drawer opens automatically via add(); reset button text
+    setTimeout(() => setAdded(false), 1200);
   };
 
   return (
@@ -179,7 +178,7 @@ function ProductPage() {
         {/* Gallery */}
         <div className="lg:col-span-7 grid grid-cols-[80px_1fr] gap-4">
           <div className="flex flex-col gap-3">
-            {[product.image, product.altImage, ...(product.video ? [product.video] : [])].map(
+            {[product.image, product.altImage].map(
               (src) => (
                 <button
                   key={src}
@@ -188,45 +187,19 @@ function ProductPage() {
                     displayMedia === src ? "border-foreground" : "border-transparent"
                   }`}
                 >
-                  {src === product.video ? (
-                    <div className="w-full h-full relative">
-                      <img
-                        src={product.image}
-                        alt=""
-                        className="w-full h-full object-cover"
-                        loading="lazy"
-                      />
-                      <div className="absolute inset-0 grid place-items-center bg-black/30">
-                        <Play className="size-5 text-white fill-white" />
-                      </div>
-                    </div>
-                  ) : (
-                    <img src={src} alt="" className="w-full h-full object-cover" loading="lazy" />
-                  )}
+                  <img src={src} alt="" className="w-full h-full object-cover" loading="lazy" />
                 </button>
               ),
             )}
           </div>
           <div className="aspect-[4/5] overflow-hidden bg-surface">
-            {isVideoActive && product.video ? (
-              <video
-                ref={mainVideoRef}
-                src={product.video}
-                muted
-                loop
-                playsInline
-                autoPlay
-                className="w-full h-full object-cover"
-              />
-            ) : (
-              <img
-                src={displayMedia}
-                alt={product.name}
-                width={1200}
-                height={1500}
-                className="w-full h-full object-cover"
-              />
-            )}
+            <img
+              src={displayMedia}
+              alt={product.name}
+              width={1200}
+              height={1500}
+              className="w-full h-full object-cover"
+            />
           </div>
         </div>
 
