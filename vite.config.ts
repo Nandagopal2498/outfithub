@@ -4,8 +4,8 @@ import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 import tailwindcss from "@tailwindcss/vite";
 
-export default defineConfig({
-  base: "/outfithub/",
+export default defineConfig(({ mode }) => ({
+  base: mode === "production" ? "/outfithub/" : "/",
   plugins: [
     TanStackRouterVite({
       routesDirectory: "./src/routes",
@@ -15,5 +15,5 @@ export default defineConfig({
     tailwindcss(),
     tsconfigPaths(),
   ],
-});
+}));
 
